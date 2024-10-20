@@ -98,6 +98,10 @@ input::placeholder{
     height: 100%;
 }
 
+.find-parking-button-l{
+    height: 100%;
+}
+
 .find-parking-button:hover {
     background-color: #004494; /* Darker shade on hover */
 }

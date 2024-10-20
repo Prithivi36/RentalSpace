@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -11,7 +12,7 @@ const Navbar = () => {
 
     return (
         <div className="navbar">
-            <div className="navbar-logo">Sarkar Space</div>
+            <Link className="navbar-logo"  to=""><div className="navbar-logo">Sarkar Space</div></Link>
             
         </div>
     );

@@ -10,6 +10,7 @@ import Host from './components/Host/Host'; // Import Host component
 import { BrowserRouter as Router, HashRouter, Route, Routes } from 'react-router-dom'; // Import routing tools
 import HostMain from './components/Host/HostMain';
 import HostDashboard from './components/Host/HostDashboard';
+import User from './components/User/User';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/host" element={<Host />} />
           <Route path="/hostmain" element={<HostMain/>} />
           <Route path='/hostdash' element={<HostDashboard/>}/>
+          <Route path='/user' element={<User/>}/>
         </Routes>
       </div>
     </HashRouter>

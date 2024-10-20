@@ -57,8 +57,11 @@
     font-weight: 700; /* Bold weight */
     color: #005eb8;
     font-family: 'Poppins', sans-serif; /* Use Poppins for the logo */
+    text-decoration: none;
 }
-
+.navbar-logo:hover{
+    cursor: pointer;
+}
 .navbar-items {
     display: flex;
     align-items: center;
@@ -85,6 +88,7 @@
     cursor: pointer;
     margin-left: 20px;
     position: relative; /* Relative positioning for the button */
+   
 }
 
 .dropdown-content {
@@ -93,22 +97,30 @@
     background-color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Brighter shadow */
     z-index: 1;
-}
-
-.dropdown-content a {
     color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+    min-width: 150px; /* Set a minimum width for the dropdown */
+    padding: 10px 0; /* Add padding for top and bottom */
+    border-radius: 8px; /* Optional: add rounded corners */
+    
 }
 
-.dropdown-content a:hover {
+
+.nav-drop-li {
+    color: black;
+    padding: 8px 12px; /* Adjust padding for a smaller size */
+    text-decoration: none;
+    display: flex; /* Change to flex for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+   
+}
+.nav-drop-li:hover {
     background-color: black;
     color: aliceblue;
 }
 
 .dropdown-icon {
-    margin-left: 5px;
+    
     font-size: 12px; /* Adjust size as needed */
     transition: transform 0.2s ease; /* Smooth rotation */
     color: black;

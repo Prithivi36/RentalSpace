@@ -12,7 +12,8 @@ const Navbar = () => {
 
     return (
         <div className="navbar">
-            <div className="navbar-logo">Sarkar Space</div>
+            <Link className="navbar-logo"  ><div className="navbar-logo">Sarkar Space</div></Link>
+            
             <div className="navbar-items">
                 <div className="dropdown">
                     <button className="dropbtn" onClick={toggleDropdown}>
@@ -23,10 +24,17 @@ const Navbar = () => {
                     </button>
                     {dropdownOpen && (
                         <div className="dropdown-content">
-                            <a href="#type1">Type 1</a>
-                            <a href="#type2">Type 2</a>
-                            <a href="#type3">Type 3</a>
-                            <a href="#type4">Type 4</a>
+                            <Link to="/user" className="nav-drop-li"><a >Car</a></Link>
+                            <Link to="/user" className="nav-drop-li"><a >Bike</a></Link>
+
+                            <Link to="/user" className="nav-drop-li"><a >Truck</a></Link>
+
+                            <Link to="/user" className="nav-drop-li"><a >Jeep</a></Link>
+
+                            
+                            
+                            
+                            
                         </div>
                     )}
                 </div>

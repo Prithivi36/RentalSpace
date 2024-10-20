@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './HeroSection.css';
-import { FaLocationArrow } from 'react-icons/fa'; // Location icon from react-icons
+import { FaLocationArrow } from 'react-icons/fa'; 
+import { Link } from 'react-router-dom';
+
 
 const HeroSection = () => {
     const [address, setAddress] = useState('');
@@ -21,9 +23,10 @@ const HeroSection = () => {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
-                <button onClick={handleFindParking} className="find-parking-button">
-                    Find Parking
-                </button>
+                <Link to="/user" className='find-parking-button-l'><button  className="find-parking-button">
+                Find Parking
+                </button></Link>
+                
             </div>
         </div>
     );
