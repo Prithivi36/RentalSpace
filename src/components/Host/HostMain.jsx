@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './HostMain.css';  // For matching the theme
 
@@ -13,6 +13,33 @@ const HostMain = () => {
     available: true,
     pricePerHour: '',
   });
+
+  // Automatically get user's location
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setFormData((prevData) => ({
+              ...prevData,
+              latitude,
+              longitude,
+            }));
+          },
+          (error) => {
+            console.error('Error getting location:', error);
+            // Handle error (e.g., show a message to the user)
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+        // Handle case where geolocation is not supported
+      }
+    };
+
+    getLocation();
+  }, []);
 
   // Handle form change
   const handleChange = (e) => {
@@ -62,29 +89,19 @@ const HostMain = () => {
           />
         </div>
 
-        <div className="form-group">
-          <label>Latitude</label>
-          <input
-            type="number"
-            name="latitude"
-            value={formData.latitude}
-            onChange={handleChange}
-            placeholder="Enter latitude"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Longitude</label>
-          <input
-            type="number"
-            name="longitude"
-            value={formData.longitude}
-            onChange={handleChange}
-            placeholder="Enter longitude"
-            required
-          />
-        </div>
+        {/* Latitude and Longitude fields hidden from the user */}
+        <input
+          type="hidden"
+          name="latitude"
+          value={formData.latitude}
+          readOnly
+        />
+        <input
+          type="hidden"
+          name="longitude"
+          value={formData.longitude}
+          readOnly
+        />
 
         <div className="form-group">
           <label>Vehicle Allowed</label>
