@@ -42,24 +42,7 @@ const HostDashboard = () => {
     getLocation();
   }, []);
 
-  // Fetch spaces listed by the host
-  useEffect(() => {
-    const fetchSpaces = async () => {
-      try {
-        const response = await fetch("/api/spaces");
-        const data = await response.json();
-        setSpaces(data);
-
-        // Calculate total earnings
-        const totalEarnings = data.reduce((sum, space) => sum + (space.moneyEarned || 0), 0);
-        setEarnings(totalEarnings);
-      } catch (error) {
-        console.error("Error fetching spaces:", error);
-      }
-    };
-
-    fetchSpaces();
-  }, []);
+  
 
   // Handle form submission to add a new space
   const handleAddSpace = async () => {
@@ -128,7 +111,10 @@ const HostDashboard = () => {
 
       {/* Form to Add New Space */}
       {showForm && (
+        
         <div className="add-space-form">
+          <p>Lattitude : {newSpace.latitude}</p>
+          <p>Longitude : {newSpace.longitude}</p>
           <h3>Add a New Space</h3>
           {locationError && <p style={{ color: "red" }}>{locationError}</p>}
 
