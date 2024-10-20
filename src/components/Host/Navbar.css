@@ -1,0 +1,119 @@
+@font-face {
+    font-family: Inter;
+    src: url(https://d9lvjui2ux1xa.cloudfront.net/fonts/v3/Inter-VariableFont.woff2) format("woff2 supports variations"),
+         url(https://d9lvjui2ux1xa.cloudfront.net/fonts/v3/Inter-VariableFont.woff2) format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: optional;
+}
+
+@font-face {
+    font-family: Museo;
+    src: url(https://d9lvjui2ux1xa.cloudfront.net/fonts/v3/MuseoSansRounded-900-webfont.woff2) format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: GT-Ultra;
+    src: url(https://d9lvjui2ux1xa.cloudfront.net/fonts/v3/gt-ultra-median-bold-trial-webfont.woff2) format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: GT-Ultra;
+    src: url(https://d9lvjui2ux1xa.cloudfront.net/fonts/v3/gt-ultra-median-bold-italic-trial-webfont.woff2) format("woff2");
+    font-weight: 700;
+    font-style: italic;
+    font-display: fallback;
+}
+
+
+
+
+/* Existing font-face declarations go here */
+.navbar {
+    position: fixed; /* Keep the navbar fixed to the top */
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center items vertically */
+    padding: 20px; /* Increased padding for height */
+    width: 80%; /* Set width to 80% of the page */
+    background-color: white; /* Background color */
+    border-bottom-left-radius: 20px; /* Bottom left radius */
+    border-bottom-right-radius: 20px; /* Bottom right radius */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Brighter shadow */
+    left: 50%; /* Start positioning from the center */
+    transform: translateX(-50%); /* Center the navbar */
+    font-family: 'Roboto', sans-serif; /* Use Roboto for other texts */
+    top: 0; /* Stick to the top */
+    z-index: 1000; /* Ensure it's above the hero image */
+}
+.navbar-logo {
+    font-size: 28px; /* Adjusted size for logo */
+    font-weight: 700; /* Bold weight */
+    color: #005eb8;
+    font-family: 'Poppins', sans-serif; /* Use Poppins for the logo */
+}
+
+.navbar-items {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-items a {
+    margin-left: 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    color: black;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 20px;
+    position: relative; /* Relative positioning for the button */
+}
+
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Brighter shadow */
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: black;
+    color: aliceblue;
+}
+
+.dropdown-icon {
+    margin-left: 5px;
+    font-size: 12px; /* Adjust size as needed */
+    transition: transform 0.2s ease; /* Smooth rotation */
+    color: black;
+}
+
+.dropdown-icon.open {
+    transform: rotate(180deg); /* Rotate icon when open */
+}

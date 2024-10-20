@@ -1,0 +1,65 @@
+.how-it-works- {
+    text-align: center;
+    padding: 40px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .how-it-works- h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #1a73e8;
+    font-family: "Poppins","sans-serif";
+  }
+  
+  .how-it-works- p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+  }
+  
+  .steps {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .step {
+    max-width: 250px;
+    text-align: center;
+  }
+  
+  .step-icon {
+    font-size: 48px;
+    color: #1a73e8;
+    margin-bottom: 15px;
+  }
+  
+  .step h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .step p {
+    font-size: 16px;
+    color: #777;
+  }
+  
+  .list-space-btn {
+    background-color: #000;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 30px;
+    border-radius: 5px;
+  }
+  
+  .list-space-btn:hover {
+    background-color: #333;
+  }
+  

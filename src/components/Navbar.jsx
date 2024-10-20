@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -29,7 +30,8 @@ const Navbar = () => {
                         </div>
                     )}
                 </div>
-                <a href="#become-a-host">Become a Host</a>
+                <Link to="/host"><a>Become a Host</a></Link>
+                
                 <a href="#login">Login</a>
                 <a href="#signup">Signup</a>
             </div>

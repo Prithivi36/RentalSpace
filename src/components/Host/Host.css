@@ -1,0 +1,53 @@
+.host-hero{
+
+    display: flex;
+    justify-content: space-around;
+    background-color: #00559e;
+    margin-top: 100px;
+    height: 400px;
+}
+
+.host-hero-left{
+    width: 40%;
+    
+}
+
+
+.host-hero-img{
+    width: 90%;
+   margin: 10px 10px;
+
+}
+
+.host-hero-img img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.host-hero-right{
+    margin: 10px    ;
+
+}
+
+.host-hero-title{
+    font-size: 50px;
+    color: white;
+}
+
+.host-hero-title-p{
+    color: white;
+    font-size: 20px;
+}
+
+.host-hro-btn{
+    background-color: #c7ebff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.host-hro-btn:hover{
+    background-color: #a9dcf7;
+}
