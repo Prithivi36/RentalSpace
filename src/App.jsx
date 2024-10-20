@@ -9,6 +9,7 @@ import WhatYouParking from './components/WhatYouParking';
 import Host from './components/Host/Host'; // Import Host component
 import { BrowserRouter as Router, HashRouter, Route, Routes } from 'react-router-dom'; // Import routing tools
 import HostMain from './components/Host/HostMain';
+import HostDashboard from './components/Host/HostDashboard';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           {/* Host Page */}
           <Route path="/host" element={<Host />} />
           <Route path="/hostmain" element={<HostMain/>} />
+          <Route path='/hostdash' element={<HostDashboard/>}/>
         </Routes>
       </div>
     </HashRouter>

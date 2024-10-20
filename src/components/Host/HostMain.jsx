@@ -70,7 +70,7 @@ const HostMain = () => {
     // e.g., await axios.post('/api/host', formData);
 
     // Redirect after submission or show success message
-    navigate('/host-success');  // For example, redirect to success page
+    navigate('/hostdash');  // For example, redirect to success page
   };
 
   return (

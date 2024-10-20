@@ -35,7 +35,7 @@ const HowItWorks = () => {
           <p>Schedule a move-in time with your renter, and start getting paid.</p>
         </div>
       </div>
-      <Link to="/hostmain"> <button className="list-space-btn">List your space</button></Link>
+      <Link to="/hostdash"> <button className="list-space-btn">List your space</button></Link>
      
     
     </div>

@@ -21,9 +21,9 @@ const Host = () => {
           <h1 className='host-hero-title'>
           Get paid to store RVs, <br></br>cars, or boxes.
           </h1>
-          <p className='host-hero-title-p'>Rent out your unused spaces with Neighbor®</p>
+          <p className='host-hero-title-p'>Rent out your unused spaces with SarkarSpace®</p>
           
-          <Link to="/hostmain"><button className="host-hro-btn">
+          <Link to="/hostdash"><button className="host-hro-btn">
             List Your Space
           </button></Link>
           <p className='host-hero-title-p'>It's Free and Secure</p>
