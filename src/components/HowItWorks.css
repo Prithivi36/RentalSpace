@@ -1,0 +1,76 @@
+.how-it-works {
+    display: flex;
+    background-color: #e9eff4;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .left-section {
+    width: 50%;
+  }
+  
+  .left-section h1 {
+    font-family: 'GT-Ultra', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 30px;
+    width: 325px;
+    padding: 5px;
+  }
+  
+  .tabs button {
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 20px;
+    font-family: 'GT-Ultra', sans-serif;
+  }
+  
+  .tabs .active {
+    background-color: #005eb8; /* Primary color */
+    color: white;
+  }
+  
+  .content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+  }
+  
+  .icon-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px; /* Increased margin between text sections */
+  }
+  
+  .icon-text i {
+    font-size: 1.5rem;
+    color: #005eb8; /* Primary color */
+  }
+  
+  .right-section {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .how-it-works-image {
+    max-width: 100%; /* Makes sure the image scales to fit the container */
+    height: auto;
+    border-radius: 20px;
+  }
+  

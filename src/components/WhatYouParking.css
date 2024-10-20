@@ -1,0 +1,83 @@
+/* WhatYouParking.css */
+
+.what-you-parking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.heading {
+    font-size: 3rem; /* Big text */
+    color: black; /* Black color */
+    margin-bottom: 30px;
+    margin-top: 30px; /* Space below the heading */
+}
+
+.vehicle-options {
+    display: flex;
+    justify-content: space-around;
+    width: 100%; /* Adjust to fit your layout */
+    max-width: 800px; /* Limit the width */
+    margin-bottom: 30px; /* Space below the vehicle options */
+}
+
+.vehicle-option {
+    display: flex;
+    flex-direction: column;
+    color: gray;
+    align-items: center;
+    border: 1px solid rgb(188, 188, 188); /* Black border */
+    padding: 20px;
+    width: 100px;
+    border-radius: 5px; /* Optional rounding of corners */
+    transition: border-color 0.3s; /* Smooth transition for hover effect */
+    cursor: pointer; /* Show pointer on hover */
+}
+
+.vehicle-option:hover {
+    border-color: #005eb8; /* Primary color border on hover */
+}
+
+.vehicle-icon {
+    font-size: 2.5rem; /* Size of icons */
+    margin-bottom: 10px; /* Space below icon */
+}
+
+.map-container {
+    width: 100%; /* Full width */
+    max-width: 800px; /* Limit the width */
+    height: 300px; /* Height of the map */
+    border: 1px solid black; /* Black border for map container */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(206, 205, 205);
+
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(12.5px);
+-webkit-backdrop-filter: blur(12.5px);
+border: 1px solid rgba(255, 255, 255, 1);
+}
+
+
+.map-placeholder button{
+    background-color: #005eb8;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+}
+
+.map-container button:hover{
+    background-color: #016ed5;
+}
+
+.map-placeholder {
+    color: black;
+    font-size: 1.5rem; /* Placeholder text size */
+}
