@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-section subscribe">
-          <h4>Stay in the loop!</h4>
+          <h4>Stay in the loop!!</h4>
           <p>Useful articles about becoming a successful host.</p>
           <div className="subscribe-input">
             <input type="email" placeholder="Email address" />
