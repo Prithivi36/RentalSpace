@@ -128,7 +128,10 @@ const HostDashboard = () => {
 
       {/* Form to Add New Space */}
       {showForm && (
+        
         <div className="add-space-form">
+          <p>Lattitude : {newSpace.latitude}</p>
+          <p>Longitude : {newSpace.longitude}</p>
           <h3>Add a New Space</h3>
           {locationError && <p style={{ color: "red" }}>{locationError}</p>}
 
