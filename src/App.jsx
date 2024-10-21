@@ -11,6 +11,8 @@ import { BrowserRouter as Router, HashRouter, Route, Routes } from 'react-router
 import HostMain from './components/Host/HostMain';
 import HostDashboard from './components/Host/HostDashboard';
 import User from './components/User/User';
+import Login from './components/SigninLogin/Login';
+import SignUp from './components/SigninLogin/SignUp';
 
 function App() {
   return (
@@ -37,6 +39,10 @@ function App() {
           <Route path="/hostmain" element={<HostMain/>} />
           <Route path='/hostdash' element={<HostDashboard/>}/>
           <Route path='/user' element={<User/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
+
+
         </Routes>
       </div>
     </HashRouter>

@@ -39,9 +39,11 @@ const Navbar = () => {
                     )}
                 </div>
                 <Link to="/host">Become a Host</Link>
+                <Link to="/login"><a href="#login">Login</a></Link>
+                <Link to="/signup"><a href="#signup">Signup</a></Link>
+
                 
-                <a href="#login">Login</a>
-                <a href="#signup">Signup</a>
+                
             </div>
         </div>
     );

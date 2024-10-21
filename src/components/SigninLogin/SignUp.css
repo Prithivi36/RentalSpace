@@ -1,0 +1,107 @@
+/* Style for login page container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f9fc;
+    
+  }
+  
+  /* Wrapper for login box */
+  .login-wrapper {
+    display: flex;
+    width: 600px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Left section of the login box */
+  .login-left {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-left h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  /* Google login button */
+  .google-login-btn,
+  .phone-login-btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .google-login-btn:hover,
+  .phone-login-btn:hover {
+    background-color: #357ae8;
+  }
+  
+  /* Phone login button */
+  .phone-login-btn {
+    background-color: #34a853;
+  }
+  
+  .phone-login-btn:hover {
+    background-color: #2c8f46;
+  }
+  
+  /* Input fields for email and password */
+  .email-log input,
+  .name-log input,
+  .pass-log input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  /* Login button */
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #005eb8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .login-btn:hover {
+    background-color: #004b8a;
+  }
+  
+  /* Right section, empty for now but can be used for images or extra content */
+  .login-right {
+    flex: 1;
+    /* background-color: #005eb8; */
+    
+  }
+
+
+  .login-img{
+    width: 200px;
+  }
+  
+
+  .login-img img{
+    width: 200%;
+  }
