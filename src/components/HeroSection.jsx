@@ -7,10 +7,6 @@ import { Link } from 'react-router-dom';
 const HeroSection = () => {
     const [address, setAddress] = useState('');
 
-    const handleFindParking = () => {
-        // Logic to find parking goes here
-        alert(`Finding parking for: ${address}`);
-    };
 
     return (
         <div className="hero-section">
