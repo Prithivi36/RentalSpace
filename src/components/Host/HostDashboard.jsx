@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
-import { getUser, getUserSpace } from "../../api/Api";
+import { getUser, getUserRequest, getUserSpace } from "../../api/Api";
 
 const HostDashboard = () => {
 
@@ -11,17 +11,19 @@ const HostDashboard = () => {
   const [cuurentUser,setCurrentUser]=React.useState({
 
   })
+  const [userRequest,setUserRequest]=React.useState([])
   
   React.useEffect(()=>{
     getUser(localStorage.getItem('user')).then(res=>setCurrentUser(res.data))
-  })
+    getUserRequest(localStorage.getItem('user')).then(res=>setUserRequest(res.data.filter(a=>!a.status)))
+  },[])
   
   
   const [mySpace,setMySpace]=React.useState([]);
 
   React.useEffect(()=>{
     getUserSpace(localStorage.getItem('user')).then(res=>setMySpace(res.data))
-  })
+  },[])
 
   return (
 
@@ -113,42 +115,42 @@ const HostDashboard = () => {
           <div className="notifications">
             <h1>Notifications</h1>
             <div className="notification-table">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Action</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                      <div className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
-                    </td>
-                  </tr>
-                  <tr>
-
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td><div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                      <div className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
-                    </td>
-                  </tr>
-                  <tr>
-
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td><div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                      <div className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              
+                
+                  {userRequest.length==0? <h1 className="text-center">
+                    You are up to date :
+                  </h1>:
+                  <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Action</th>
+  
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      userRequest.map((request)=>{
+                        console.log(request)
+                        return(
+                          <tr key={request._id}>
+                            <td>{request.userId}</td>
+                            <td>{request.spaceId}</td>
+                            <td><div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
+                              <div className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
+                            </td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                  </table>
+                  }
+                  
+                  
+                
+              
             </div>
           </div>
 
