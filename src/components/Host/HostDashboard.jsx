@@ -4,15 +4,7 @@ import "./HostDashboard.css";
 import Navbar from "./Navbar";
 
 const HostDashboard = () => {
-  const [spaces, setSpaces] = useState([]);
-  const [newSpace, setNewSpace] = useState({
-    vehicleAllowed: [],
-    pricePerHour: 0,
-    imageUrl: "",
-    latitude: 0,
-    longitude: 0,
-  });
-  const [showForm, setShowForm] = useState(false);
+  
 
  
 
@@ -23,71 +15,124 @@ const HostDashboard = () => {
   return (
     
     <div className="dashboard-container">
-        
-      <h2>Host Dashboard</h2>
-
-      {/* Earnings Section */}
-      <section className="earnings-section">
-        <h3>Total Earnings</h3>
-        <p>122.5</p>
-      </section>
-
-      {/* Spaces Section */}
-      <section className="spaces-section">
-        <h3>Your Listed Spaces</h3>
-        {spaces.length > 0 ? (
-          <div className="space-list">
-            {spaces.map((space) => (
-              <div key={space._id} className="space-item">
-                <img
-                  src={space.imageUrl || "/default-image.jpg"}
-                  alt="Space"
-                  className="space-image"
-                />
-                <p>
-                  <strong>Vehicles Allowed:</strong> {space.vehicleAllowed.join(", ")}
-                </p>
-                <p>
-                  <strong>Price per Hour:</strong> ${space.pricePerHour}
-                </p>
+      <div className="host-left">
+          <div className="host-left-top">
+              <div className="user-details">
+                <div className="userdetails-left">
+                <i class="bi bi-person"></i>
+                </div>
+                <div className="userdetails-right">
+                <h1>My Profile</h1>
+                <p><span className="fw-bold">Name: </span>Ajithey</p>
+                <p><span className="fw-bold">Address: </span>Kalapatti,Coimbatore</p >
+                </div>
+                
               </div>
-            ))}
           </div>
-        ) : (
-          <p>No spaces listed yet.</p>
-        )}
-      </section>
+          <hr />
+          <div className="host-left-bottom">
+            <h1>My Bookings</h1>
+            <div className="host-left-bottom-table">
+            <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Address</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">15/9/2023</th>
+      <td>Coimbatore</td>
+      <td>Virat</td>
+      <td className="text-success">Accepted</td>
+    </tr>
+    <tr>
+      <th scope="row">18/9/2035</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td className="text-reject">Rejected</td>
+    </tr>
+    <tr>
+      <th scope="row">14/8/2025</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td className="text-success">Accepted</td>
+    </tr>
+  </tbody>
+</table>
 
-      {/* Add Space Button */}
-      <button className="add-space-btn" onClick={() => setShowForm(true)}>
-        Add New Space
-      </button>
 
-      {/* Form to Add New Space */}
-      {showForm && (
-        
-        <div className="add-space-form">
-          <p>Lattitude : {newSpace.latitude}</p>
-          <p>Longitude : {newSpace.longitude}</p>
-          <h3>Add a New Space</h3>
-          <label>Vehicles Allowed:</label>
-          <input
-            type="text"
-            placeholder="Enter vehicles (e.g., bike, car)"
-            name="vehicleAllowed"
-          />
-          <label>Price per Hour:</label>
-          <input
-            type="number"
-            value={newSpace.pricePerHour}
-            name="pricePerHour"
-          />          
 
-          <button >
-            Submit
-          </button>
+            </div>
+
+          </div>
+      </div>
+      <div className="host-right">
+        <div className="host-right-top">
+          <div className="myspaces">
+            <h1>My Spaces</h1>
+            <div className="myspace-container">
+                <h3>Local Garage</h3>
+                <p><span className="fw-bold">Located in : </span>Coimbatore</p>
+                <div className="vehicles-allowed">
+                  <span className="fw-bold">Vehicles Allowed: </span>car,bike
+                </div>
+                
+            </div>
+          </div>
+
         </div>
-      )}
+        <hr />
+        <div className="host-right-bottom">
+          <div className="notifications">
+            <h1>Notifications</h1>
+            <div className="notification-table">
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Action</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+ 
+      <td>Mark</td>
+      <td>Otto</td>
+      <td><div className="action-btn-p"><i class="bi bi-check-square-fill"></i></div>
+      <div className="action-btn-n"><i class="bi bi-x-square-fill"></i></div>
+      </td>
+    </tr>
+    <tr>
+      
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td><div className="action-btn-p"><i class="bi bi-check-square-fill"></i></div>
+      <div className="action-btn-n"><i class="bi bi-x-square-fill"></i></div>
+      </td>
+    </tr>
+    <tr>
+   
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td><div className="action-btn-p"><i class="bi bi-check-square-fill"></i></div>
+      <div className="action-btn-n"><i class="bi bi-x-square-fill"></i></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+          </div>
+          
+
+        </div>
+
+      </div>
     </div>
   );
 };
