@@ -6,6 +6,15 @@ import Navbar from "./Navbar";
 const HostDashboard = () => {
 
 
+ 
+  const [cuurentUser,setCurrentUser]=React.useState({
+
+  })
+
+  const username=localStorage.getItem('user')
+  console.log(username);
+  
+
 
 
 
