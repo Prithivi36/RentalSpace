@@ -7,25 +7,6 @@ const Navbar = () => {
     const navigator=useNavigate();
     return (
 
-<<<<<<< HEAD
-                            <Link to="/user" className="nav-drop-li">Truck</Link>
-
-                            <Link to="/user" className="nav-drop-li">Jeep</Link>
-
-                            
-                            
-                            
-                            
-                        </div>
-                    )}
-                </div>
-                <Link to="/host">Become a Host</Link>
-                <Link to="/login"><a href="#login">Login</a></Link>
-                <Link to="/signup"><a href="#signup">Signup</a></Link>
-
-                
-                
-=======
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Rental Space</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
@@ -37,7 +18,6 @@ const Navbar = () => {
             <a className="nav-item nav-link" onClick={()=>navigator("/host")}>Become a Host</a>
             <a className="nav-item nav-link" onClick={()=>navigator("/login")}>Login</a>
             <a className="nav-item nav-link" onClick={()=>navigator("/signup")}>Signup</a>
->>>>>>> 0e6f1e03a2e21467a76ba888f2d100db3f8a066f
             </div>
         </div>
         </nav>
