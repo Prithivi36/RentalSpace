@@ -23,11 +23,6 @@ const HostDashboard = () => {
     getUserSpace(localStorage.getItem('user')).then(res=>setMySpace(res.data))
   })
 
-
-
-
-
-
   return (
 
     <div className="dashboard-container">
