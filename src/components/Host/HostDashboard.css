@@ -1,77 +1,186 @@
+/* General Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  
+  margin: 70px 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .dashboard-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 70px auto;
-    font-family: 'Inter', sans-serif;
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+
+  min-height: 100vh;
+}
+
+/* Left Section Styles */
+.host-left {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.host-left-top {
+  margin-bottom: 40px;
+}
+
+.user-details {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+
+.userdetails-left i {
+  font-size: 100px;
+  color: #005eb8;
+  background-color: #e2ebf9;
+  border-radius: 10px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  color: #333;
+}
+
+p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+/* My Bookings Section */
+.host-left-bottom {
+  margin-top: 40px;
+}
+
+.host-left-bottom h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.host-left-bottom-table {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.thead-dark th {
+  background-color: #333;
+  color: white;
+}
+
+.table .text-success {
+  color: #28a745;
+}
+.table .text-reject {
+  color: #ff1e00;
+}
+/* Right Section Styles */
+.host-right {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* My Spaces Section */
+.host-right-top h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.myspace-container {
+  padding: 20px;
+  background-color: #f7f9fc;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 40px;
+}
+
+.myspace-container h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.myspace-container p {
+  margin: 0;
+  color: #333;
+}
+
+.vehicles-allowed {
+  margin-top: 10px;
+  color: #666;
+}
+
+/* Notifications Section */
+.host-right-bottom h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.notification-table {
+  overflow-x: auto;
+}
+
+.notification-table table {
+  width: 100%;
+}
+
+.notification-table th, .notification-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+}
+
+.notification-table .action-btn-p {
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  color: #005eb8;
+}
+.notification-table .action-btn-n {
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  color: #ff0000;
+}
+
+.notification-table .action-btn-p:hover {
+  color: #004080;
+}
+.notification-table .action-btn-n:hover {
+  color: #ff1919;
+}
+
+.notification-table i {
+  font-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
   }
-  
-  h2, h3 {
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .earnings-section, .spaces-section {
+
+  .host-left, .host-right {
     margin-bottom: 20px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-  
-  p {
-    margin: 10px 0;
-  }
-  
-  .space-item {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .space-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-right: 20px;
-  }
-  
-  .add-space-btn {
-    padding: 10px 20px;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .add-space-form {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-  
- .add-space-form input {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .add-space-form button {
-    padding: 10px 20px;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+}

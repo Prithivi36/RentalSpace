@@ -45,7 +45,7 @@ const SignUp = () => {
             <input type="password" placeholder="Password" />
           </div>
 
-          <button className="login-btn" onClick={handleSubmit}>Login</button>
+          <button className="login-btn" onClick={handleSubmit}>Sign Up</button>
           <p>Already have an account ? <span className='text-primary' onClick={handleSubmit}>Login</span></p>
         </div>
 
