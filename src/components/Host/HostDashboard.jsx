@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
+import { getUser, getUserSpace } from "../../api/Api";
 
 const HostDashboard = () => {
 
@@ -10,11 +11,17 @@ const HostDashboard = () => {
   const [cuurentUser,setCurrentUser]=React.useState({
 
   })
-
-  const username=localStorage.getItem('user')
-  console.log(username);
   
+  React.useEffect(()=>{
+    getUser(localStorage.getItem('user')).then(res=>setCurrentUser(res.data))
+  })
+  
+  
+  const [mySpace,setMySpace]=React.useState([]);
 
+  React.useEffect(()=>{
+    getUserSpace(localStorage.getItem('user')).then(res=>setMySpace(res.data))
+  })
 
 
 
@@ -32,7 +39,7 @@ const HostDashboard = () => {
             </div>
             <div className="userdetails-right">
               <h1>My Profile</h1>
-              <p><span className="fw-bold">Name: </span>Ajithey</p>
+              <p><span className="fw-bold">Name: </span>{cuurentUser.name}</p>
               <p><span className="fw-bold">Address: </span>Kalapatti,Coimbatore</p >
             </div>
 
@@ -80,14 +87,29 @@ const HostDashboard = () => {
         <div className="host-right-top">
           <div className="myspaces">
             <h1>My Spaces</h1>
-            <div className="myspace-container">
-              <h3>Local Garage</h3>
-              <p><span className="fw-bold">Located in : </span>Coimbatore</p>
-              <div className="vehicles-allowed">
-                <span className="fw-bold">Vehicles Allowed: </span>car,bike
-              </div>
-
+            {mySpace.length==0?
+            <div className="text-center">
+                <h3>No Space , Add now ??</h3>
+                <div className="d-flex align-items-center justify-content-center">
+                  <button className="btn btn-primary p-3 m-3 d-block">
+                    Add Now
+                  </button>
+                </div>
             </div>
+            :
+            mySpace.map((space)=>{
+              return(
+                <div key={space._id} className="myspace-container">
+                  <h3>Local Garage</h3>
+                  <p><span className="fw-bold">Located in : </span>{space.address}</p>
+                  <div className="vehicles-allowed">
+                    <span className="fw-bold">Vehicles Allowed: </span>{space.vehiclesAllowed}
+                  </div>
+                  <p className={space.available?"text-success":"text-danger"}>{space.available?"available":"Not Available"}</p>
+                </div>
+              )
+            })
+            }
           </div>
 
         </div>
