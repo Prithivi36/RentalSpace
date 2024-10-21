@@ -1,14 +1,32 @@
 import React from 'react';
 import './Login.css';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { getUid } from '../../api/Api';
 
 const Login = () => {
     const navigate=useNavigate()
-    const handleSubmit=()=>{
+    const [user,setUser]=React.useState({
+      email:"",
+      password:""
+    })
+    function handleSubmit(){
+      
+      getUid(user.email).then(res=>handleLogin(res.data))
+      
         navigate('/hostdash')
     }
-
-   
+    function handleLogin(d){
+      localStorage.setItem('user',d)
+    }
+   function handleChange(e){
+        const {name,value}=e.target;
+        setUser((prev)=>{
+          return(
+            {...prev,[name]:value}
+          )
+        })
+   }
+   console.log(user);
     const handleSwitch=()=>{
         navigate('/signup')
     }
@@ -21,10 +39,10 @@ const Login = () => {
           <h1 className='mb-5'>Welcome Back</h1>
        
           <div className="email-log">
-            <input type="text" placeholder="Enter your email" />
+            <input onChange={handleChange} name='email' type="text" placeholder="Enter your email" />
           </div>
           <div className="pass-log">
-            <input type="password" placeholder="Password" />
+            <input onChange={handleChange} name='password' type="password" placeholder="Password" />
           </div>
 
           

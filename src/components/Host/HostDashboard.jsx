@@ -15,7 +15,12 @@ const HostDashboard = () => {
   const [showForm, setShowForm] = useState(false);
 
  
+  const [cuurentUser,setCurrentUser]=React.useState({
 
+  })
+
+  const username=localStorage.getItem('user')
+  console.log(username);
   
 
   
