@@ -14,32 +14,7 @@ const HostMain = () => {
     pricePerHour: '',
   });
 
-  // Automatically get user's location
-  useEffect(() => {
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            setFormData((prevData) => ({
-              ...prevData,
-              latitude,
-              longitude,
-            }));
-          },
-          (error) => {
-            console.error('Error getting location:', error);
-            // Handle error (e.g., show a message to the user)
-          }
-        );
-      } else {
-        console.error('Geolocation is not supported by this browser.');
-        // Handle case where geolocation is not supported
-      }
-    };
-
-    getLocation();
-  }, []);
+  
 
   // Handle form change
   const handleChange = (e) => {

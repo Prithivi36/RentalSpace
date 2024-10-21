@@ -10,14 +10,13 @@ import { Link,useNavigate } from 'react-router-dom';
 const Host = () => {
   return (
     <div>
-      <Navbar />
-      <div className="host-hero">
-        <div className="host-hero-left">
-         <div className="host-hero-img">
-          <img src="/host-hero.jpg" alt="" className='host-hero-img-' />
+      <div className="host-hero py-5 d-block d-md-flex">
+        <div className="host-hero-left d-none d-md-block  text-center d-flex align-items-center justify-content-center ">
+         <div className="host-hero-img  pt-5">
+          <img src="/host-hero.jpg" alt="" className='host-hero-img- img-fluid w-100 rounded-5' />
          </div>
         </div>
-        <div className="host-hero-right">
+        <div className="host-hero-right d-flex flex-column align-items-center justify-content-center  ">
           <h1 className='host-hero-title'>
           Get paid to store RVs, <br></br>cars, or boxes.
           </h1>

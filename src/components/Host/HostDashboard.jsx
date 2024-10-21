@@ -12,59 +12,13 @@ const HostDashboard = () => {
     latitude: 0,
     longitude: 0,
   });
-  const [earnings, setEarnings] = useState(0);
   const [showForm, setShowForm] = useState(false);
-  const [locationError, setLocationError] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Automatically get user's location on component mount
-  useEffect(() => {
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            setNewSpace((prevData) => ({
-              ...prevData,
-              latitude,
-              longitude,
-            }));
-          },
-          (error) => {
-            console.error("Error getting location:", error);
-            setLocationError("Unable to fetch location. Please check your browser settings.");
-          }
-        );
-      } else {
-        setLocationError("Geolocation is not supported by this browser.");
-      }
-    };
-    getLocation();
-  }, []);
+ 
 
   
 
-  // Handle form submission to add a new space
-  const handleAddSpace = async () => {
-    if (!newSpace.vehicleAllowed.length || !newSpace.pricePerHour || !newSpace.imageUrl) {
-      alert("Please fill all fields before submitting.");
-      return;
-    }
-
-    try {
-      setIsSubmitting(true);
-      const response = await axios.post("/api/host/addSpace", newSpace);
-      setSpaces([...spaces, response.data]); // Add the new space to the list
-      setShowForm(false); // Hide the form after adding
-      setIsSubmitting(false);
-
-      // Recalculate earnings after adding the new space
-      setEarnings((prevEarnings) => prevEarnings + response.data.moneyEarned);
-    } catch (error) {
-      console.error("Error adding space", error);
-      setIsSubmitting(false);
-    }
-  };
+  
 
   return (
     
@@ -75,7 +29,7 @@ const HostDashboard = () => {
       {/* Earnings Section */}
       <section className="earnings-section">
         <h3>Total Earnings</h3>
-        <p>${earnings.toFixed(2)}</p>
+        <p>122.5</p>
       </section>
 
       {/* Spaces Section */}
@@ -116,36 +70,21 @@ const HostDashboard = () => {
           <p>Lattitude : {newSpace.latitude}</p>
           <p>Longitude : {newSpace.longitude}</p>
           <h3>Add a New Space</h3>
-          {locationError && <p style={{ color: "red" }}>{locationError}</p>}
-
           <label>Vehicles Allowed:</label>
           <input
             type="text"
             placeholder="Enter vehicles (e.g., bike, car)"
-            onChange={(e) =>
-              setNewSpace({
-                ...newSpace,
-                vehicleAllowed: e.target.value.split(",").map((v) => v.trim()),
-              })
-            }
+            name="vehicleAllowed"
           />
-
           <label>Price per Hour:</label>
           <input
             type="number"
             value={newSpace.pricePerHour}
-            onChange={(e) => setNewSpace({ ...newSpace, pricePerHour: Number(e.target.value) })}
-          />
+            name="pricePerHour"
+          />          
 
-          <label>Image URL:</label>
-          <input
-            type="text"
-            value={newSpace.imageUrl}
-            onChange={(e) => setNewSpace({ ...newSpace, imageUrl: e.target.value })}
-          />
-
-          <button onClick={handleAddSpace} disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit"}
+          <button >
+            Submit
           </button>
         </div>
       )}
