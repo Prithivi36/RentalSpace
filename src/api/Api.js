@@ -14,3 +14,6 @@ export function getUser(id){
 export function getUserSpace(id){
     return axios.get(BASE_URL+"/park/my/"+id);
 }
+export function getUserRequest(id){
+    return axios.get(BASE_URL+"/book/my/"+id)
+}
