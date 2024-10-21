@@ -5,9 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const HowItWorks = () => {
 
-  
-
-
   return (
     <div className="how-it-works-">
       <h2>How Neighbor works</h2>
