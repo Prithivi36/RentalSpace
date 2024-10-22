@@ -25,6 +25,13 @@ const HostDashboard = () => {
     getUserSpace(localStorage.getItem('user')).then(res=>setMySpace(res.data))
   },[])
 
+  function handleAccept(){
+    
+  }
+  function handleReject(){
+
+  }
+
   return (
 
     <div className="dashboard-container">
@@ -138,10 +145,10 @@ const HostDashboard = () => {
                             <td>{request.userName}</td>
                             <td>{request.address}</td>
                             <td>{request.status?
-                              <h3 className="text-success">ongoing</h3>:
+                              <p className="text-success">ongoing</p>:
                             <div>
-                              <div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                              <div className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
+                              <div onClick={handleAccept} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
+                              <div onClick={handleReject} className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
                             </div>
                             }
                             </td>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './User.css'; 
 import Map from './Map';
-import MapWithClick from './Map';
 
 const User = ({ isHost, userLocation }) => {
   const [langLat,setLangLat]= React.useState({lat:null,lng:null})
@@ -12,13 +11,21 @@ const User = ({ isHost, userLocation }) => {
         setShow(!show);
       
   }
+  const [current,setCurrent]=React.useState({lat:0,lng:0})
+
+  useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(
+      (pos)=>{
+        setCurrent({lat:pos.coords.latitude,lng:pos.coords.longitude})
+      }
+    )
+  },[])
 
   return (
     <div className="list-storage-container">
       
         {!show?<button onClick={handleMapClick}>Enter Mannually</button>:<button onClick={handleMapClick}>Ok</button> }
-        {show && <Map lat={setLangLat}/>}
-      {/* <Map lat={setLangLat}/>  */}
+        {show && <Map current={current} lat={setLangLat}/>}
       {
         console.log(langLat)
         
