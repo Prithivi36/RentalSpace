@@ -15,7 +15,7 @@ const HostDashboard = () => {
   
   React.useEffect(()=>{
     getUser(localStorage.getItem('user')).then(res=>setCurrentUser(res.data))
-    getUserRequest(localStorage.getItem('user')).then(res=>setUserRequest(res.data.filter(a=>!a.status)))
+    getUserRequest(localStorage.getItem('user')).then(res=>setUserRequest(res.data))
   },[])
   
   
@@ -135,10 +135,15 @@ const HostDashboard = () => {
                         console.log(request)
                         return(
                           <tr key={request._id}>
-                            <td>{request.userId}</td>
-                            <td>{request.spaceId}</td>
-                            <td><div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
+                            <td>{request.userName}</td>
+                            <td>{request.address}</td>
+                            <td>{request.status?
+                              <h3 className="text-success">ongoing</h3>:
+                            <div>
+                              <div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
                               <div className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
+                            </div>
+                            }
                             </td>
                           </tr>
                         )
