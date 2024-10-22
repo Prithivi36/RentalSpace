@@ -17,3 +17,6 @@ export function getUserSpace(id){
 export function getUserRequest(id){
     return axios.get(BASE_URL+"/book/my/"+id)
 }
+export function acceptBooking(id){
+    axios.patch(BASE_URL+"/id")
+}

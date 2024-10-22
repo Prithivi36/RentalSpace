@@ -23,7 +23,7 @@ const HostDashboard = () => {
   
   React.useEffect(()=>{
     getUser(localStorage.getItem('user')).then(res=>setCurrentUser(res.data))
-    getUserRequest(localStorage.getItem('user')).then(res=>setUserRequest(res.data.filter(a=>!a.status)))
+    getUserRequest(localStorage.getItem('user')).then(res=>setUserRequest(res.data))
   },[])
   
   
@@ -32,6 +32,13 @@ const HostDashboard = () => {
   React.useEffect(()=>{
     getUserSpace(localStorage.getItem('user')).then(res=>setMySpace(res.data))
   },[])
+
+  function handleAccept(){
+    
+  }
+  function handleReject(){
+
+  }
 
   return (
 
@@ -190,10 +197,15 @@ const HostDashboard = () => {
                         console.log(request)
                         return(
                           <tr key={request._id}>
-                            <td>{request.userId}</td>
-                            <td>{request.spaceId}</td>
-                            <td><div className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                              <div className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
+                            <td>{request.userName}</td>
+                            <td>{request.address}</td>
+                            <td>{request.status?
+                              <p className="text-success">ongoing</p>:
+                            <div>
+                              <div onClick={handleAccept} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
+                              <div onClick={handleReject} className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
+                            </div>
+                            }
                             </td>
                           </tr>
                         )
