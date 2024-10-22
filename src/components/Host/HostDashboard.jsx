@@ -3,45 +3,52 @@ import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
 import { getUser, getUserRequest, getUserSpace } from "../../api/Api";
-import { Modal, Button, Form } from 'react-bootstrap';
 
 const HostDashboard = () => {
-
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+  const [formShow, setFormShow] = useState(false);
+  const handleShow = () => setFormShow(true);
   const handleClose = () => {
-    setShow(false);
+    setFormShow(false);
     setFormData({ name: '', email: '', message: '' });
   };
 
+  // Functions for Map
+  const [langLat, setLangLat] = useState({ lat: null, lng: null });
+  const [show, setShow] = useState(false);
+  const handleMapClick = () => {
+    setShow(!show);
+  };
+  const [current, setCurrent] = useState({ lat: 0, lng: 0 });
 
- 
-  const [cuurentUser,setCurrentUser]=React.useState({
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setCurrent({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+    });
+  }, []);
 
-  })
-  const [userRequest,setUserRequest]=React.useState([])
-  
-  React.useEffect(()=>{
-    getUser(localStorage.getItem('user')).then(res=>setCurrentUser(res.data))
-    getUserRequest(localStorage.getItem('user')).then(res=>setUserRequest(res.data))
-  },[])
-  
-  
-  const [mySpace,setMySpace]=React.useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+  const [userRequest, setUserRequest] = useState([]);
 
-  React.useEffect(()=>{
-    getUserSpace(localStorage.getItem('user')).then(res=>setMySpace(res.data))
-  },[])
+  useEffect(() => {
+    getUser(localStorage.getItem('user')).then(res => setCurrentUser(res.data));
+    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data));
+  }, []);
 
-  function handleAccept(){
-    
+  const [mySpace, setMySpace] = useState([]);
+
+  useEffect(() => {
+    getUserSpace(localStorage.getItem('user')).then(res => setMySpace(res.data));
+  }, []);
+
+  function handleAccept() {
+    // Handle acceptance logic
   }
-  function handleReject(){
 
+  function handleReject() {
+    // Handle rejection logic
   }
 
   return (
-
     <div className="dashboard-container">
       <div className="host-left">
         <div className="host-left-top">
@@ -51,10 +58,9 @@ const HostDashboard = () => {
             </div>
             <div className="userdetails-right">
               <h1>My Profile</h1>
-              <p><span className="fw-bold">Name: </span>{cuurentUser.name}</p>
-              <p><span className="fw-bold">Address: </span>Kalapatti,Coimbatore</p >
+              <p><span className="fw-bold">Name: </span>{currentUser.name}</p>
+              <p><span className="fw-bold">Address: </span>Kalapatti, Coimbatore</p>
             </div>
-
           </div>
         </div>
         <hr />
@@ -92,138 +98,127 @@ const HostDashboard = () => {
               </tbody>
             </table>
           </div>
-     
         </div>
       </div>
       <div className="host-right">
         <div className="host-right-top">
           <div className="myspaces">
             <h1>My Spaces</h1>
-            {mySpace.length==0?
-            <div className="text-center">
-                <h3>No Space , Add now ??</h3>
+            {mySpace.length === 0 ?
+              <div className="text-center">
+                <h3>No Space, Add now ??</h3>
                 <div className="d-flex align-items-center justify-content-center">
-
-                <div>
-      <Button variant="primary" onClick={handleShow}>
-        Open Input Modal
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Input Form</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form >
-            <Form.Group controlId="formName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                required
-              />
-            </Form.Group>
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                
-                required
-              />
-            </Form.Group>
-            <Form.Group controlId="formMessage">
-              <Form.Label>Message</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="message"
-
-                required
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    </div>
-
-
-                  <button className="btn btn-primary p-3 m-3 d-block">
-                    Add Now
-                  </button>
-                </div>
-            </div>
-            :
-            mySpace.map((space)=>{
-              return(
-                <div key={space._id} className="myspace-container">
-                  <h3>Local Garage</h3>
-                  <p><span className="fw-bold">Located in : </span>{space.address}</p>
-                  <div className="vehicles-allowed">
-                    <span className="fw-bold">Vehicles Allowed: </span>{space.vehiclesAllowed}
+                  <div>
+                    <button className="btn btn-primary p-3 m-3 d-block" onClick={handleShow}>
+                      Add Space
+                    </button>
+                    {formShow && (
+                      <div className="modal show" style={{ display: 'block' }}>
+                        <div className="modal-dialog">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title">Add Space</h5>
+                              <button type="button" className="close" onClick={handleClose}>
+                                <span>&times;</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              <form>
+                                <div className="form-group">
+                                  <label>Address</label>
+                                  <textarea className="form-control" name="name" required></textarea>
+                                </div>
+                                {/* <div className="form-group">
+                                  <p>Location:</p>
+                                  <button type="button" className="btn btn-primary mt-1 mb-3" onClick={handleMapClick}>
+                                    {!show ? 'Enter Manually' : 'Ok'}
+                                  </button>
+                                  {show && <Map current={current} lat={setLangLat} />}
+                                </div> */}
+                                <div className="form-group">
+                                  <p>Vehicles Allowed</p>
+                                  <div className="form-check">
+                                    <input type="checkbox" className="form-check-input" id="car" />
+                                    <label className="form-check-label" htmlFor="car">Car</label>
+                                  </div>
+                                  <div className="form-check">
+                                    <input type="checkbox" className="form-check-input" id="bike" />
+                                    <label className="form-check-label" htmlFor="bike">Bike</label>
+                                  </div>
+                                  <p className="text-success mt-3">Available</p>
+                                </div>
+                                <div className="form-group">
+                                  <label>Price per Hour</label>
+                                  <input type="number" className="form-control" name="message" required />
+                                </div>
+                                <button type="submit" className="btn btn-primary mt-3">Submit</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <p className={space.available?"text-success":"text-danger"}>{space.available?"available":"Not Available"}</p>
                 </div>
-              )
-            })
+              </div>
+              :
+              mySpace.map((space) => {
+                return (
+                  <div key={space._id} className="myspace-container">
+                    <h3>Local Garage</h3>
+                    <p><span className="fw-bold">Located in: </span>{space.address}</p>
+                    <div className="vehicles-allowed">
+                      <span className="fw-bold">Vehicles Allowed: </span>{space.vehiclesAllowed}
+                    </div>
+                    <p className={space.available ? "text-success" : "text-danger"}>
+                      {space.available ? "Available" : "Not Available"}
+                    </p>
+                  </div>
+                );
+              })
             }
           </div>
-
         </div>
         <hr />
         <div className="host-right-bottom">
           <div className="notifications">
             <h1>Notifications</h1>
             <div className="notification-table">
-              
-                
-                  {userRequest.length==0? <h1 className="text-center">
-                    You are up to date :
-                  </h1>:
-                  <table className="table">
+              {userRequest.length === 0 ? (
+                <h1 className="text-center">You are up to date:</h1>
+              ) : (
+                <table className="table">
                   <thead>
                     <tr>
                       <th scope="col">Name</th>
                       <th scope="col">Address</th>
                       <th scope="col">Action</th>
-  
                     </tr>
                   </thead>
                   <tbody>
-                    {
-                      userRequest.map((request)=>{
-                        console.log(request)
-                        return(
-                          <tr key={request._id}>
-                            <td>{request.userName}</td>
-                            <td>{request.address}</td>
-                            <td>{request.status?
-                              <p className="text-success">ongoing</p>:
-                            <div>
-                              <div onClick={handleAccept} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                              <div onClick={handleReject} className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
-                            </div>
+                    {userRequest.map((request) => {
+                      return (
+                        <tr key={request._id}>
+                          <td>{request.userName}</td>
+                          <td>{request.address}</td>
+                          <td>
+                            {request.status ?
+                              <p className="text-success">Ongoing</p> :
+                              <div>
+                                <div onClick={handleAccept} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
+                                <div onClick={handleReject} className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
+                              </div>
                             }
-                            </td>
-                          </tr>
-                        )
-                      })
-                    }
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
-                  </table>
-                  }
-                  
-                  
-                
-              
+                </table>
+              )}
             </div>
           </div>
-
-
         </div>
-
       </div>
     </div>
   );
