@@ -18,8 +18,11 @@ export function getUserRequest(id){
     return axios.get(BASE_URL+"/book/my/"+id)
 }
 export function acceptBooking(id){
-    axios.patch(BASE_URL+"/book/"+id)
+    return axios.patch(BASE_URL+"/book/"+id)
 }
 export function rejectBooking(id){
-    axios.patch(BASE_URL+"/book/r/"+id)
+    return axios.patch(BASE_URL+"/book/r/"+id)
+}
+export function findNearby(lt,ld,rad){
+    return axios.get(BASE_URL+"/park/"+lt+"/"+ld+"/"+rad);
 }
