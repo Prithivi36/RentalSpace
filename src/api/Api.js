@@ -18,5 +18,8 @@ export function getUserRequest(id){
     return axios.get(BASE_URL+"/book/my/"+id)
 }
 export function acceptBooking(id){
-    axios.patch(BASE_URL+"/id")
+    axios.patch(BASE_URL+"/book/"+id)
+}
+export function rejectBooking(id){
+    axios.patch(BASE_URL+"/book/r/"+id)
 }

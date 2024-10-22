@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
-import { getUser, getUserRequest, getUserSpace } from "../../api/Api";
+import { acceptBooking, getUser, getUserRequest, getUserSpace, rejectBooking } from "../../api/Api";
 
 const HostDashboard = () => {
   const [formShow, setFormShow] = useState(false);
@@ -31,7 +31,7 @@ const HostDashboard = () => {
 
   useEffect(() => {
     getUser(localStorage.getItem('user')).then(res => setCurrentUser(res.data));
-    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data));
+    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f)=>(f.status!="rejected"))));
   }, []);
 
   const [mySpace, setMySpace] = useState([]);
@@ -40,12 +40,14 @@ const HostDashboard = () => {
     getUserSpace(localStorage.getItem('user')).then(res => setMySpace(res.data));
   }, []);
 
-  function handleAccept() {
-    // Handle acceptance logic
+  function handleAccept(id) {
+    acceptBooking(id)
+    location.reload()// Handle acceptance logic
   }
 
-  function handleReject() {
-    // Handle rejection logic
+  function handleReject(id) {
+    // Handle rejection logic    rejectBooking(id);
+    location.reload();
   }
 
   return (
@@ -196,18 +198,20 @@ const HostDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {userRequest.map((request) => {
-                      return (
-                        <tr key={request._id}>
-                          <td>{request.userName}</td>
-                          <td>{request.address}</td>
-                          <td>
-                            {request.status ?
-                              <p className="text-success">Ongoing</p> :
-                              <div>
-                                <div onClick={handleAccept} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                                <div onClick={handleReject} className="action-btn-n"><i className="bi bi-x-square-fill"></i></div>
-                              </div>
+                    {
+                      userRequest.map((request)=>{
+                        console.log(request)
+                        return(
+                          <tr key={request._id}>
+                            <td>{request.userName}</td>
+                            <td>{request.address}</td>
+                            <td>{(request.status==="accepted")?
+                              <p className="text-success">accepted</p>:
+                            <div>
+                              <div onClick={()=>handleAccept(request._id)} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
+                              <div  className="action-btn-n"><i
+                              onClick={()=>handleReject(request._id)} className="bi bi-x-square-fill"></i></div>
+                            </div>
                             }
                           </td>
                         </tr>
