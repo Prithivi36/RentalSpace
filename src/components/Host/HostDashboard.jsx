@@ -3,8 +3,16 @@ import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
 import { getUser, getUserRequest, getUserSpace } from "../../api/Api";
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const HostDashboard = () => {
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+    setFormData({ name: '', email: '', message: '' });
+  };
 
 
  
@@ -77,7 +85,7 @@ const HostDashboard = () => {
               </tbody>
             </table>
           </div>
-
+     
         </div>
       </div>
       <div className="host-right">
@@ -88,6 +96,53 @@ const HostDashboard = () => {
             <div className="text-center">
                 <h3>No Space , Add now ??</h3>
                 <div className="d-flex align-items-center justify-content-center">
+
+                <div>
+      <Button variant="primary" onClick={handleShow}>
+        Open Input Modal
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Input Form</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form >
+            <Form.Group controlId="formName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formMessage">
+              <Form.Label>Message</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="message"
+
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </div>
+
+
                   <button className="btn btn-primary p-3 m-3 d-block">
                     Add Now
                   </button>
