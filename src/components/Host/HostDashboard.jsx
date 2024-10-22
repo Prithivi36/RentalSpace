@@ -6,11 +6,27 @@ import { acceptBooking, getUser, getUserRequest, getUserSpace, rejectBooking } f
 
 const HostDashboard = () => {
   const [formShow, setFormShow] = useState(false);
+  const [formData,setFormData] = useState({
+    Address:"",
+    vehiclesAllowed:{
+      car:true,
+      bike:true
+    },
+    Available:true,
+    pricePerHour:0
+  })
+
+
   const handleShow = () => setFormShow(true);
   const handleClose = () => {
     setFormShow(false);
     setFormData({ name: '', email: '', message: '' });
   };
+
+
+
+  //After Submit the Add space
+ 
 
   // Functions for Map
   const [langLat, setLangLat] = useState({ lat: null, lng: null });
@@ -118,17 +134,19 @@ const HostDashboard = () => {
                       <div className="modal show" style={{ display: 'block' }}>
                         <div className="modal-dialog">
                           <div className="modal-content">
-                            <div className="modal-header">
-                              <h5 className="modal-title">Add Space</h5>
-                              <button type="button" className="close" onClick={handleClose}>
+                            <div className="modal-header d-flex justify-content-between">
+                              <h5 className="modal-title ">Add Space</h5>
+                            
+                              <button type="button" className="close p-2 btn btn-danger " onClick={handleClose}>
                                 <span>&times;</span>
                               </button>
+                    
                             </div>
                             <div className="modal-body">
                               <form>
-                                <div className="form-group">
+                                <div className="form-group text-start">
                                   <label>Address</label>
-                                  <textarea className="form-control" name="name" required></textarea>
+                                  <textarea className="form-control" name="name" required ></textarea>
                                 </div>
                                 {/* <div className="form-group">
                                   <p>Location:</p>
@@ -137,7 +155,7 @@ const HostDashboard = () => {
                                   </button>
                                   {show && <Map current={current} lat={setLangLat} />}
                                 </div> */}
-                                <div className="form-group">
+                                <div className="form-group text-start">
                                   <p>Vehicles Allowed</p>
                                   <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="car" />
@@ -149,11 +167,11 @@ const HostDashboard = () => {
                                   </div>
                                   <p className="text-success mt-3">Available</p>
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group text-start">
                                   <label>Price per Hour</label>
                                   <input type="number" className="form-control" name="message" required />
                                 </div>
-                                <button type="submit" className="btn btn-primary mt-3">Submit</button>
+                                <button type="submit" className="btn btn-primary mt-3 ">Submit</button>
                               </form>
                             </div>
                           </div>
