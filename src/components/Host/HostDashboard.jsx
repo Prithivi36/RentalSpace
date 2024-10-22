@@ -46,7 +46,8 @@ const HostDashboard = () => {
   }
 
   function handleReject(id) {
-    // Handle rejection logic    rejectBooking(id);
+    // Handle rejection logic    
+    rejectBooking(id);
     location.reload();
   }
 
