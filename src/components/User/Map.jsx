@@ -3,12 +3,13 @@ import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useNavigate } from 'react-router-dom';
 
-const MapClickHandler = ({ setLatLng }) => {
+const MapClickHandler = ({ setLatLng ,localLat}) => {
   // Use map events to capture the latitude and longitude on click
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
-      setLatLng({ lat, lng });  // Update the state with clicked lat and lng
+      setLatLng({ lat, lng });
+      localLat({lat,lng}) // Update the state with clicked lat and lng
     },
   });
 
@@ -16,7 +17,7 @@ const MapClickHandler = ({ setLatLng }) => {
 };
 
 const MapWithClick = (props) => {
-  const [latLng, setLatLng] = useState({ lat: 13.077513575630821, lng: 80.27577218339898 });
+  const [latLng, setLatLng] = useState({ lat: props.current.lat, lng: props.current.lng});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const MapWithClick = (props) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <MapClickHandler setLatLng={setLatLng} />
+        <MapClickHandler localLat={setLatLng} setLatLng={props.lat} />
       </MapContainer>
       {latLng && (
         <p>
