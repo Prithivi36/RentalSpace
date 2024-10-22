@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 const HeroSection = () => {
     const [address, setAddress] = useState('');
 
-    
+               
 
     return (
         <div className="hero-section">
