@@ -74,3 +74,77 @@
     border-radius: 20px;
   }
   
+
+  @media (max-width: 767px) {
+    .how-it-works {
+        flex-direction: column; /* Vertical stacking */
+        align-items: center;
+        padding: 20px;
+    }
+
+    .left-section {
+        width: 100%; /* Full width for text content */
+    }
+
+    .right-section {
+        width: 100%; /* Full width for image */
+        margin-top: 20px; /* Add some space above the image */
+    }
+
+    .tabs {
+        width: 100%; /* Full width for tabs */
+        justify-content: center;
+    }
+
+    .tabs button {
+        padding: 8px 15px; /* Adjust padding for buttons */
+        font-size: 0.9rem; /* Smaller font size for tabs */
+    }
+
+    .left-section h1 {
+        font-size: 1.8rem; /* Smaller heading for mobile */
+    }
+
+    .icon-text {
+        flex-direction: column; /* Stack icons and text vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .icon-text i {
+        font-size: 1.3rem; /* Reduce icon size */
+    }
+
+    .how-it-works-image {
+        width: 100%; /* Ensure the image takes full width */
+        border-radius: 15px; /* Reduce border radius */
+    }
+}
+
+/* Small Mobile Devices (Below 576px) */
+@media (max-width: 576px) {
+    .left-section h1 {
+        font-size: 1.5rem; /* Further reduce heading size */
+        margin-bottom: 15px;
+    }
+
+    .tabs {
+        width: 100%; /* Full width for tabs */
+    }
+
+    .tabs button {
+        padding: 6px 10px; /* Smaller padding for buttons */
+        font-size: 0.8rem; /* Smaller font size for tabs */
+    }
+
+    .right-section {
+        margin-top: 15px; /* Adjust space above the image */
+    }
+
+    .how-it-works-image {
+        border-radius: 10px; /* Smaller border radius */
+    }
+
+    .icon-text i {
+        font-size: 1.1rem; /* Reduce icon size further */
+    }
+}

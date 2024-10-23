@@ -63,7 +63,8 @@
     border-radius: 50px;
     padding: 10px;
     width: 60%; /* Reduced width */
-    height: 45px; /* Increased height */
+    height: 55px; /* Increased height */
+    justify-content: center;
 }
 
 .location-icon {
@@ -72,39 +73,38 @@
     font-size: 1.5rem; /* Adjust icon size */
 }
 
-input {
+.hero-input {
     border: none;
     outline: none;
     flex: 1;
-    padding: 10px;
+    padding: 20px;
     border-radius: 50px; /* Full border radius */
     font-family: 'Roboto', sans-serif; /* Use Roboto for the input text */
     background: transparent; /* Blurred background effect */
+    align-items: center;
+    justify-content: center;
     
 }
 
-input::placeholder{
+.hero-input::placeholder{
     color: black;
 }
 
-.find-parking-button {
-    background-color: #005eb8; /* Primary color */
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    height: 100%;
-}
 
-.find-parking-button-l{
-    height: 100%;
+.find-parking-button{
+    background-color:#005eb8;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    color: white;
+
 }
 
 .find-parking-button:hover {
     background-color: #004494; /* Darker shade on hover */
 }
+
+
 
 .location-popup {
     position: fixed;
@@ -140,4 +140,48 @@ input::placeholder{
     color: #005eb8; /* Primary color */
     cursor: pointer;
     font-weight: bold;
+}
+
+
+
+/* Mobile Devices (Below 768px) */
+@media (max-width: 767px) {
+    .hero-section {
+        height: auto; /* Let height adjust automatically for mobile */
+        padding: 15px;
+    }
+
+    .search-bar {
+        width: 90%; /* Full width search bar */
+        height: 45px; /* Smaller height for mobile screens */
+    }
+
+    .location-icon {
+        font-size: 1.2rem; /* Smaller icon size */
+    }
+
+    .hero-input {
+        padding: 10px; /* Adjust padding for input */
+    }
+
+    .find-parking-button {
+        padding: 8px 15px; /* Smaller button for mobile */
+    }
+
+   
+}
+
+/* Small mobile devices (Below 576px) */
+@media (max-width: 576px) {
+    
+
+    .search-bar {
+        width: 95%; /* Almost full width search bar */
+    }
+
+    .find-parking-button {
+        padding: 6px 10px; /* Smaller button for small mobile devices */
+    }
+
+    
 }
