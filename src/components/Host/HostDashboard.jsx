@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
-import { acceptBooking, getUser, getUserRequest, getUserSpace, rejectBooking } from "../../api/Api";
+import { acceptBooking, addSpace, getUser, getUserRequest, getUserSpace, rejectBooking } from "../../api/Api";
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import UserDash from "./DashComp/UserDash";
 import MyBooks from "./DashComp/MyBooks";
 import Requests from "./DashComp/Requests";
 import SpaceComp from "./DashComp/SpaceComp";
+import Map from '../User/Map'
 
 
 const HostDashboard = () => {
-  const [current,setCurrent] = React.useState({ lat: 12.9716, lng: 77.5946 });
+  const [current,setCurrent] = React.useState({ lat: null, lng:null });
+  const [show, setShow] = useState(false);
   React.useEffect(()=>{
     console.log("Getting current location")
     navigator.geolocation.getCurrentPosition(pos=>{
@@ -21,7 +23,7 @@ const HostDashboard = () => {
         lng: pos.coords.longitude
       })
     })
-  })
+  },[])
   const [formShow, setFormShow] = useState(false);
   const [formData, setFormData] = useState({
     Address: "",
@@ -70,6 +72,19 @@ const HostDashboard = () => {
 
     // Log the current form data to the console
     console.log("Form Data:", formData);
+    const data={
+      userId:localStorage.getItem('user'),
+      address:formData.Address,
+      location:{
+        type:"Point",
+        coordinates:[formData.lat,formData.lng]
+      },
+      vehiclesAllowed: formData.vehiclesAllowed.car?formData.vehiclesAllowed.bike?["car","bike"]:["car"]:["bike"],
+      available: formData.Available,
+      pricePerHour: formData.pricePerHour
+
+    }
+    addSpace(data).then(res=>alert(res.data));
 
     // Reset form data to initial state
     setFormData({
@@ -90,30 +105,8 @@ const HostDashboard = () => {
 
 
 
-  // Functions for Map
-  const locationIconUrl = '/geo-alt-fill.svg';
-  const locationIcon = L.icon({
-    iconUrl: locationIconUrl,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-  });
-  const [show, setShow] = useState(false);
 
-  // Get user's current location on component mount
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setCurrent({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      (error) => {
-        console.error("Error getting location: ", error);
-      }
-    );
-  }, []);
+  
 
   // Function to toggle the map's visibility
   const handleMapClick = () => {
@@ -122,28 +115,31 @@ const HostDashboard = () => {
 
   const [currentUser, setCurrentUser] = useState({});
   const [userRequest, setUserRequest] = useState([]);
+  const [mySpace, setMySpace] = useState([]);
 
   useEffect(() => {
     getUser(localStorage.getItem('user')).then(res => setCurrentUser(res.data));
     getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f) => (f.status != "rejected"))));
   }, []);
 
-  const [mySpace, setMySpace] = useState([]);
 
   useEffect(() => {
     getUserSpace(localStorage.getItem('user')).then(res => setMySpace(res.data));
   }, []);
 
+  // Handle acceptance logic
   function handleAccept(id) {
     acceptBooking(id)
-    location.reload()// Handle acceptance logic
+    location.reload()
   }
 
+  // Handle rejection logic    
   function handleReject(id) {
-    // Handle rejection logic    
     rejectBooking(id);
     location.reload();
   }
+
+  console.log(formData)
 
   return (
     <div className="dashboard-container">
@@ -192,29 +188,30 @@ const HostDashboard = () => {
                                     {!show ? 'Search by Map' : 'Ok'}
                                   </button>
                                   {show && (
-                                    <MapContainer
-                                      center={[formData.lat || current.lat, formData.lng || current.lng]} // Use formData lat/lng or current
-                                      zoom={13}
-                                      style={{ height: '200px', width: '100%' }}
-                                      onClick={(e) => {
-                                        const { lat, lng } = e.latlng; // Get latitude and longitude from the click event
-                                        setFormData((prevData) => ({
-                                          ...prevData,
-                                          lat, // Update the latitude
-                                          lng  // Update the longitude
-                                        }));
-                                      }}
-                                    >
-                                      <TileLayer
-                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                        attribution="&copy; OpenStreetMap contributors"
-                                      />
-                                      {formData.lat && formData.lng && (
-        <Marker position={[formData.lat, formData.lng]} icon={locationIcon}>
-          <Popup>Your selected location</Popup>
-        </Marker>
-      )}
-                                    </MapContainer>
+                                    <Map current={current} lat = {setFormData} />
+                                    // <MapContainer
+                                    //   center={[current.lat,current.lng]} // Use formData lat/lng or current
+                                    //   zoom={13}
+                                    //   style={{ height: '200px', width: '100%' }}
+                                    //   onClick={(e) => {
+                                    //     const { lat, lng } = e.latlng; // Get latitude and longitude from the click event
+                                    //     setFormData((prevData) => ({
+                                    //       ...prevData,
+                                    //       lat, // Update the latitude
+                                    //       lng  // Update the longitude
+                                    //     }));
+                                    //   }}
+                                    // >
+                                    //   <TileLayer
+                                    //     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    //     attribution="&copy; OpenStreetMap contributors"
+                                    //   />
+                                    //   {formData.lat && formData.lng && (
+                                    //     <Marker position={[formData.lat, formData.lng]} icon={locationIcon}>
+                                    //       <Popup>Your selected location</Popup>
+                                    //     </Marker>
+                                    //   )}
+                                    // </MapContainer>
                                   )}
                                 </div>
 
