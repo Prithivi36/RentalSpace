@@ -81,3 +81,67 @@ border: 1px solid rgba(255, 255, 255, 1);
     color: black;
     font-size: 1.5rem; /* Placeholder text size */
 }
+
+
+@media (max-width: 767px) {
+    .what-you-parking {
+        padding: 10px;
+    }
+
+    .heading {
+        font-size: 2rem; /* Smaller heading on mobile */
+        margin-bottom: 15px;
+    }
+
+    .vehicle-options {
+        align-items: center;
+    }
+
+    .vehicle-option {
+        width: 80px; /* Smaller vehicle options */
+        margin-bottom: 20px; /* Space between options */
+        padding: 10px; /* Less padding */
+    }
+
+    .vehicle-icon {
+        font-size: 2rem; /* Smaller icon size */
+    }
+
+    .map-container {
+        height: 300px; /* Maintain map height */
+        max-width: 100%; /* Full width on mobile */
+    }
+
+    .map-placeholder {
+        font-size: 1.2rem; /* Smaller text size */
+    }
+}
+
+/* Small Mobile Devices (Below 576px) */
+@media (max-width: 576px) {
+    .heading {
+        font-size: 1.8rem; /* Further reduce heading size */
+        margin-bottom: 10px;
+    }
+
+    .vehicle-options {
+        align-items: center;
+    }
+
+    .vehicle-option {
+        width: 70px; /* Further reduced size */
+        padding: 8px; /* Smaller padding */
+    }
+
+    .map-container {
+        height: 250px; /* Smaller map height for small devices */
+    }
+
+    .map-placeholder {
+        font-size: 1.1rem; /* Smaller text size */
+    }
+
+    .map-container button {
+        padding: 10px; /* Adjust button padding for small devices */
+    }
+}

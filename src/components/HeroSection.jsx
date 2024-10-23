@@ -3,10 +3,16 @@ import './HeroSection.css';
 import { FaLocationArrow } from 'react-icons/fa'; 
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
 
 
 const HeroSection = () => {
     const [address, setAddress] = useState('');
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/user'); // Use navigate function to go to /user
+    }
 
                
 
@@ -21,11 +27,11 @@ const HeroSection = () => {
                     placeholder="Enter address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
+                    className='hero-input'
                 />
-                <Link to="/user" className='find-parking-button-l'><button  className="find-parking-button">
+                <button  className="find-parking-button" onClick={handleClick}>
                 Find Parking
-                </button></Link>
-                
+                </button>
             </div>
         </div>
     );
