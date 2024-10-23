@@ -16,16 +16,18 @@ const User = ({ isHost, userLocation }) => {
   //auto detected data
   const [current,setCurrent]=React.useState({lat:0,lng:0})
 
+
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(
       (pos)=>{
-        setCurrent({lat:pos.coords.latitude,lng:pos.coords.longitude})
-        findNearby(pos.coords.latitude,pos.coords.longitude,500000).then(
+        console.log("bilii")
+        setCurrent((p)=>({...p,lat:pos.coords.latitude,lng:pos.coords.longitude}))
+        findNearby(langLat.lat||pos.coords.latitude,langLat.lng||pos.coords.longitude,5000).then(
           res=>setAvailableSpace(res.data)
         )
       }
     )
-  },[])
+  },[langLat])
  
 console.log(availableSpace)
   return (
