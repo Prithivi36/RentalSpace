@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL="http://localhost:8080"
+const BASE_URL="http://20.2.91.105:8080"
 
 export  function saveUser(user){
     return axios.post(BASE_URL+"/user/",user);
@@ -25,4 +25,7 @@ export function rejectBooking(id){
 }
 export function findNearby(lt,ld,rad){
     return axios.get(BASE_URL+"/park/"+lt+"/"+ld+"/"+rad);
+}
+export function addSpace(data){
+    return axios.post(BASE_URL+"/park/",data);
 }

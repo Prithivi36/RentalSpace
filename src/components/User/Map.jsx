@@ -9,7 +9,7 @@ const MapClickHandler = ({ setLatLng, localLat }) => {
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
-      setLatLng({ lat, lng });
+      setLatLng(prev=>({...prev, lat, lng }));
       localLat({ lat, lng }); // Update the state with clicked lat and lng
     },
   });
