@@ -3,51 +3,116 @@ import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
 import { acceptBooking, getUser, getUserRequest, getUserSpace, rejectBooking } from "../../api/Api";
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import L from 'leaflet';
+
 
 const HostDashboard = () => {
   const [formShow, setFormShow] = useState(false);
-  const [formData,setFormData] = useState({
-    Address:"",
-    vehiclesAllowed:{
-      car:true,
-      bike:true
+  const [formData, setFormData] = useState({
+    Address: "",
+    vehiclesAllowed: {
+      car: true,
+      bike: true
     },
-    Available:true,
-    pricePerHour:0
+    Available: true,
+    pricePerHour: 0,
+    lat: null, // Initialize latitude
+    lng: null
   })
 
 
   const handleShow = () => setFormShow(true);
   const handleClose = () => {
     setFormShow(false);
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({
+      Address: "",
+      vehiclesAllowed: {
+        car: true,
+        bike: true
+      },
+      Available: true,
+      pricePerHour: 0
+    });
   };
 
 
 
   //After Submit the Add space
- 
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setFormData((prevData) => ({
+        ...prevData,
+        vehiclesAllowed: { ...prevData.vehiclesAllowed, [name]: checked },
+      }));
+    } else {
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    }
+  };
+
+  const addSpaceSubmit = (e) => {
+    e.preventDefault();
+
+    // Log the current form data to the console
+    console.log("Form Data:", formData);
+
+    // Reset form data to initial state
+    setFormData({
+      Address: "",
+      vehiclesAllowed: {
+        car: true,
+        bike: true
+      },
+      Available: true,
+      pricePerHour: 0,
+      lat: 0, // Reset latitude
+      lng: 0  // Reset longitude
+    });
+
+    // Optionally hide the form or perform other actions
+    setFormShow(false);
+  };
+
+
 
   // Functions for Map
-  const [langLat, setLangLat] = useState({ lat: null, lng: null });
+  const locationIconUrl = '/geo-alt-fill.svg';
+  const locationIcon = L.icon({
+    iconUrl: locationIconUrl,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
+  const current = { lat: 12.9716, lng: 77.5946 };
   const [show, setShow] = useState(false);
-  const handleMapClick = () => {
-    setShow(!show);
-  };
-  const [current, setCurrent] = useState({ lat: 0, lng: 0 });
 
+  // Get user's current location on component mount
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      setCurrent({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCurrent({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.error("Error getting location: ", error);
+      }
+    );
   }, []);
+
+  // Function to toggle the map's visibility
+  const handleMapClick = () => {
+    setShow((prevShow) => !prevShow);
+  };
 
   const [currentUser, setCurrentUser] = useState({});
   const [userRequest, setUserRequest] = useState([]);
 
   useEffect(() => {
     getUser(localStorage.getItem('user')).then(res => setCurrentUser(res.data));
-    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f)=>(f.status!="rejected"))));
+    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f) => (f.status != "rejected"))));
   }, []);
 
   const [mySpace, setMySpace] = useState([]);
@@ -137,44 +202,100 @@ const HostDashboard = () => {
                           <div className="modal-content">
                             <div className="modal-header d-flex justify-content-between">
                               <h5 className="modal-title ">Add Space</h5>
-                            
+
                               <button type="button" className="close p-2 btn btn-danger " onClick={handleClose}>
                                 <span>&times;</span>
                               </button>
-                    
+
                             </div>
                             <div className="modal-body">
                               <form>
                                 <div className="form-group text-start">
                                   <label>Address</label>
-                                  <textarea className="form-control" name="name" required ></textarea>
-                                </div>
-                                {/* <div className="form-group">
-                                  <p>Location:</p>
+                                  <textarea
+                                    className="form-control"
+                                    name="Address"
+                                    required
+                                    value={formData.Address}
+                                    onChange={handleChange}
+                                  ></textarea>
+                                  {/* Button to toggle map for manual location entry */}
                                   <button type="button" className="btn btn-primary mt-1 mb-3" onClick={handleMapClick}>
-                                    {!show ? 'Enter Manually' : 'Ok'}
+                                    {!show ? 'Search by Map' : 'Ok'}
                                   </button>
-                                  {show && <Map current={current} lat={setLangLat} />}
-                                </div> */}
+                                  {show && (
+                                    <MapContainer
+                                      center={[formData.lat || current.lat, formData.lng || current.lng]} // Use formData lat/lng or current
+                                      zoom={13}
+                                      style={{ height: '200px', width: '100%' }}
+                                      onClick={(e) => {
+                                        const { lat, lng } = e.latlng; // Get latitude and longitude from the click event
+                                        setFormData((prevData) => ({
+                                          ...prevData,
+                                          lat, // Update the latitude
+                                          lng  // Update the longitude
+                                        }));
+                                      }}
+                                    >
+                                      <TileLayer
+                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        attribution="&copy; OpenStreetMap contributors"
+                                      />
+                                      {formData.lat && formData.lng && (
+        <Marker position={[formData.lat, formData.lng]} icon={locationIcon}>
+          <Popup>Your selected location</Popup>
+        </Marker>
+      )}
+                                    </MapContainer>
+                                  )}
+                                </div>
+
                                 <div className="form-group text-start">
                                   <p>Vehicles Allowed</p>
                                   <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="car" />
+                                    <input
+                                      type="checkbox"
+                                      className="form-check-input"
+                                      id="car"
+                                      name="car"
+                                      checked={formData.vehiclesAllowed.car}
+                                      onChange={handleChange}
+                                    />
                                     <label className="form-check-label" htmlFor="car">Car</label>
                                   </div>
                                   <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="bike" />
+                                    <input
+                                      type="checkbox"
+                                      className="form-check-input"
+                                      id="bike"
+                                      name="bike"
+                                      checked={formData.vehiclesAllowed.bike}
+                                      onChange={handleChange}
+                                    />
                                     <label className="form-check-label" htmlFor="bike">Bike</label>
                                   </div>
+
                                   <p className="text-success mt-3">Available</p>
                                 </div>
+
                                 <div className="form-group text-start">
                                   <label>Price per Hour</label>
-                                  <input type="number" className="form-control" name="message" required />
+                                  <input
+                                    type="number"
+                                    className="form-control"
+                                    name="pricePerHour"
+                                    required
+                                    value={formData.pricePerHour}
+                                    onChange={handleChange}
+                                  />
                                 </div>
-                                <button type="submit" className="btn btn-primary mt-3 ">Submit</button>
+
+                                <button type="submit" className="btn btn-primary mt-3 " onClick={addSpaceSubmit}>
+                                  Submit
+                                </button>
                               </form>
                             </div>
+
                           </div>
                         </div>
                       </div>
@@ -218,24 +339,24 @@ const HostDashboard = () => {
                   </thead>
                   <tbody>
                     {
-                      userRequest.map((request)=>{
+                      userRequest.map((request) => {
                         console.log(request)
-                        return(
+                        return (
                           <tr key={request._id}>
                             <td>{request.userName}</td>
                             <td>{request.address}</td>
-                            <td>{(request.status==="accepted")?
-                              <p className="text-success">accepted</p>:
-                            <div>
-                              <div onClick={()=>handleAccept(request._id)} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
-                              <div  className="action-btn-n"><i
-                              onClick={()=>handleReject(request._id)} className="bi bi-x-square-fill"></i></div>
-                            </div>
+                            <td>{(request.status === "accepted") ?
+                              <p className="text-success">accepted</p> :
+                              <div>
+                                <div onClick={() => handleAccept(request._id)} className="action-btn-p"><i className="bi bi-check-square-fill"></i></div>
+                                <div className="action-btn-n"><i
+                                  onClick={() => handleReject(request._id)} className="bi bi-x-square-fill"></i></div>
+                              </div>
                             }
-                          </td>
-                        </tr>
-                      );
-                    })}
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               )}
