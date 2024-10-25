@@ -8,7 +8,7 @@ function Spaces(props) {
     <div className="list-storage-items p-3 mb-3">
         <div className="list-storage-top">
           <div className="lsit-storage-top-left">
-          <p><span className='fw-bold'>Owner Name: </span>{props.spaces.userId}</p>
+          <p><span className='fw-bold'>Owner Name: </span>{props.spaces.ownerName}</p>
           <p><span className='fw-bold pe-2'>Address: </span>{props.spaces.address}</p>
           <p><span className='fw-bold'>Vehicles: </span>{props.spaces.vehicleAllowed}</p>
           <p><span className='fw-bold'>Price Per Hour: </span>{props.spaces.pricePerHour}</p>
