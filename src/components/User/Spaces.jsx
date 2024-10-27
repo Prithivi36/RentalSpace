@@ -1,9 +1,23 @@
 import React from 'react'
+import { bookNow } from '../../api/Api'
 
 function Spaces(props) {
-    function handleBooking(){
-        
+  const [date,setDate]=React.useState({start:null,end:null})
+    function handleBooking(id){
+        const data = {
+            spaceId:id,
+            userId:localStorage.getItem('user'),
+            startTime:date.start,
+            endTime:date.end
+        }
+        console.log(data);
+        bookNow(data).then(res=>alert(res))
     }
+    function handleChange(e){
+      const {name,value}=e.target
+      setDate((p)=>({...p,[name]:value}))
+    }
+    console.log(date)
   return (
     <div className="list-storage-items p-3 mb-3">
         <div className="list-storage-top">
@@ -22,10 +36,10 @@ function Spaces(props) {
             
         </div>
         <div className="list-storage-bottom">
-          <p><span className='fw-bold'>Start Date:</span> <input type="datetime-local" /></p>
-          <p><span className='fw-bold'>End Date:</span> <input type="datetime-local" /></p>
+          <p><span className='fw-bold'>Start Date:</span> <input onChange={handleChange} name='start' type="datetime-local" /></p>
+          <p><span className='fw-bold'>End Date:</span> <input onChange={handleChange} name='end' type="datetime-local" /></p>
          
-          <button className='booknow-btn'>Book Now</button>
+          <button onClick={()=>handleBooking(props.spaces._id)} className='booknow-btn'>Book Now</button>
         </div>
       </div>
   )
