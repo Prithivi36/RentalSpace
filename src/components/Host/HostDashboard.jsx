@@ -13,6 +13,17 @@ import Map from '../User/Map'
 
 
 const HostDashboard = () => {
+
+  const Switcher3 = () => {
+    const [isChecked, setIsChecked] = useState(false)
+  
+    const handleCheckboxChange = () => {
+      setIsChecked(!isChecked)
+    }
+  }
+
+
+  
   const [current,setCurrent] = React.useState({ lat: null, lng:null });
   const [show, setShow] = useState(false);
   React.useEffect(()=>{
@@ -37,6 +48,9 @@ const HostDashboard = () => {
     lng: null
   })
 
+
+
+  
 
   const handleShow = () => setFormShow(true);
   const handleClose = () => {
