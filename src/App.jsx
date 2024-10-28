@@ -13,6 +13,7 @@ import HostDashboard from './components/Host/HostDashboard';
 import User from './components/User/User';
 import Login from './components/SigninLogin/Login';
 import SignUp from './components/SigninLogin/SignUp';
+import StorageForm from './components/Storage/StorageForm';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <HowItWorks />
                 <FAQ />
                 <Footer />
+                {/* <StorageForm/> */}
               </>
             }
           />
