@@ -29,3 +29,6 @@ export function findNearby(lt,ld,rad){
 export function addSpace(data){
     return axios.post(BASE_URL+"/park/",data);
 }
+export function bookNow(data){
+    return axios.post(BASE_URL+"/book",data);
+}
