@@ -33,12 +33,12 @@ console.log(availableSpace)
   return (
     <div className="list-storage-container d-block p-3">
       
-        {!show?<button onClick={handleMapClick}>Enter Mannually</button>:<button onClick={handleMapClick}>Ok</button> }
+        {!show?<button onClick={handleMapClick} className='btn btn-primary'>Enter Mannually</button>:<button onClick={handleMapClick} className='btn btn-primary'>Ok</button> }
         {show && <Map current={current} lat={setLangLat}/>}
       {console.log(langLat)}
       {availableSpace.length==0?
       <h4 className="">
-        No nearby parking spaces available. , wanna Enter manually ??
+        No nearby parking spaces available, wanna Enter manually ??
       </h4>
       :availableSpace.map((space)=>(
         <Spaces spaces={space} key={space._id}/>

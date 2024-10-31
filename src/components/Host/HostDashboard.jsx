@@ -10,6 +10,7 @@ import MyBooks from "./DashComp/MyBooks";
 import Requests from "./DashComp/Requests";
 import SpaceComp from "./DashComp/SpaceComp";
 import Map from '../User/Map'
+import StorageForm from "../Storage/StorageForm";
 
 
 const HostDashboard = () => {
@@ -174,6 +175,7 @@ const HostDashboard = () => {
                     <button className="btn btn-primary p-3 m-3 d-block" onClick={handleShow}>
                       Add Space
                     </button>
+                    <StorageForm/>
                     {formShow && (
                       <div className="modal show" style={{ display: 'block' }}>
                         <div className="modal-dialog">

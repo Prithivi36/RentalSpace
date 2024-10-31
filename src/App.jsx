@@ -13,6 +13,8 @@ import HostDashboard from './components/Host/HostDashboard';
 import User from './components/User/User';
 import Login from './components/SigninLogin/Login';
 import SignUp from './components/SigninLogin/SignUp';
+import StorageForm from './components/Storage/StorageForm';
+import Storage from './components/Storage/Storage';
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
                 <HowItWorks />
                 <FAQ />
                 <Footer />
+                {/* <StorageForm/> */}
               </>
             }
           />
@@ -42,6 +45,8 @@ function App() {
           <Route path='/user' element={<User/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/storage' element={<Storage/>}/> 
+
 
 
         </Routes>
