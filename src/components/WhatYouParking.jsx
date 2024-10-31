@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './WhatYouParking.css';
-import { FaCar, FaMotorcycle, FaTruck } from 'react-icons/fa'; 
+import { FaCar, FaMotorcycle, FaTruck ,FaBox} from 'react-icons/fa'; 
+
 import { Link, useNavigate } from 'react-router-dom'; // Correct import
 
 const WhatYouParking = () => {
@@ -50,6 +51,10 @@ const WhatYouParking = () => {
         navigate('/user'); // Use navigate function to go to /user
     }
 
+    const handleStorageClick =()=>{
+        navigate('/storage')
+    }
+
     return (
         <div className="what-you-parking">
             <h1 className="heading">What are you parking?</h1>
@@ -69,6 +74,11 @@ const WhatYouParking = () => {
                 <div className="vehicle-option" onClick={handleClick}>
                     <FaCar className="vehicle-icon" />
                     <span>Jeep</span>
+                </div>
+
+                <div className="vehicle-option" onClick={handleStorageClick}>
+                <FaBox className="vehicle-icon" />
+                    <span>Storage</span>
                 </div>
             </div>
             <div className="map-container">

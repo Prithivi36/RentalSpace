@@ -9,6 +9,8 @@ const StorageForm = () => {
     pricePerHour: '',
     cctvAvailable: false,
     available: false,
+    startDate: '',
+    endDate: '',
   });
 
   const [showForm, setShowForm] = useState(false);
@@ -16,21 +18,11 @@ const StorageForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (type === 'checkbox') {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: checked,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
   };
-
-
-
 
   const toggleAvailability = () => {
     setFormData((prevData) => ({
@@ -48,9 +40,6 @@ const StorageForm = () => {
     console.log(formData);
     setShowForm(false); // Hide the form after submission
   };
-
-
-  
 
   return (
     <div>
@@ -102,7 +91,9 @@ const StorageForm = () => {
                       {!showMap ? 'Search by Map' : 'Ok'}
                     </button>
                     {showMap && (
-                      <Map onSelect={(lat, lng) => setFormData((prev) => ({ ...prev, lat, lng }))} />
+                      <MapWithClick
+                        onSelect={(lat, lng) => setFormData((prev) => ({ ...prev, lat, lng }))}
+                      />
                     )}
                   </div>
                   <div className="form-group text-start">
@@ -138,6 +129,28 @@ const StorageForm = () => {
                       name="pricePerHour"
                       required
                       value={formData.pricePerHour}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-group text-start">
+                    <label>Start Date</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      name="startDate"
+                      required
+                      value={formData.startDate}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-group text-start">
+                    <label>End Date</label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      name="endDate"
+                      required
+                      value={formData.endDate}
                       onChange={handleChange}
                     />
                   </div>
