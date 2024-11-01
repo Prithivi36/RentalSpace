@@ -15,6 +15,7 @@ import Login from './components/SigninLogin/Login';
 import SignUp from './components/SigninLogin/SignUp';
 import StorageForm from './components/Storage/StorageForm';
 import Storage from './components/Storage/Storage';
+import StorageDash from './components/Storage/StorageDash';
 
 
 function App() {
@@ -46,6 +47,8 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/storage' element={<Storage/>}/> 
+          <Route path='/storagedash' element={<StorageDash/>}/> 
+
 
 
 

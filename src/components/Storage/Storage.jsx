@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import StorageForm from './StorageForm';
+import { useNavigate } from 'react-router-dom';
 
 function Storage() {
   const [date, setDate] = useState({ start: null, end: null });
+const navigator = useNavigate();
+
 
   // Updated array of storage data with new fields
   const storageDataArray = [
@@ -65,6 +68,7 @@ function Storage() {
           </div>
         ))}
       </div>
+      <a className="" onClick={()=>navigator("/storagedash")}>Dashboard</a>
     </>
   );
 }
