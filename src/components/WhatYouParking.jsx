@@ -22,25 +22,8 @@ const WhatYouParking = () => {
         const { latitude, longitude } = position.coords;
         setLocation({ latitude, longitude });
         
-        // Send location data to your backend to fetch matching data
-        try {
-            const response = await fetch('/api/search-location', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ latitude, longitude }),
-            });
-
-            if (response.ok) {
-                const result = await response.json();
-                setData(result); // Set the matching data here
-            } else {
-                setError('Failed to fetch matching data.');
-            }
-        } catch (err) {
-            setError('Error fetching data from server.');
-        }
+        
+         
     };
 
     const errorCallback = (error) => {
