@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MapWithClick from '../User/Map';
+import Map from '../User/Map';
 
 const StorageForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const StorageForm = () => {
     startDate: '',
     endDate: '',
   });
+  const [langLat,setLangLat]= React.useState({lat:null,lng:null})
 
   const [showForm, setShowForm] = useState(false);
   const [showMap, setShowMap] = useState(false);
@@ -34,7 +36,17 @@ const StorageForm = () => {
   const handleMapClick = () => {
     setShowMap((prevShow) => !prevShow);
   };
+  const [current,setCurrent]=React.useState({lat:0,lng:0})
 
+
+  React.useEffect(()=>{
+    navigator.geolocation.getCurrentPosition(
+      (pos)=>{
+        console.log("bilii")
+        setCurrent((p)=>({...p,lat:pos.coords.latitude,lng:pos.coords.longitude}))
+      }
+    )
+  },[langLat])
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -91,9 +103,7 @@ const StorageForm = () => {
                       {!showMap ? 'Search by Map' : 'Ok'}
                     </button>
                     {showMap && (
-                      <MapWithClick
-                        onSelect={(lat, lng) => setFormData((prev) => ({ ...prev, lat, lng }))}
-                      />
+                      <Map current={current} lat={setLangLat}/>
                     )}
                   </div>
                   <div className="form-group text-start">
