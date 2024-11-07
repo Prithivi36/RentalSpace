@@ -32,3 +32,6 @@ export function addSpace(data){
 export function bookNow(data){
     return axios.post(BASE_URL+"/book",data);
 }
+export function getMyBooks(id){
+    return axios.get(BASE_URL+"/book/all/"+id);
+}

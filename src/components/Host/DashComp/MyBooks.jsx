@@ -1,10 +1,16 @@
 import React from 'react'
+import { getMyBooks } from '../../../api/Api'
 
 function MyBooks() {
+  const [books,setBooks]=React.useState([])
+  React.useEffect(() => {
+    getMyBooks(localStorage.getItem('user')).then(res=>setBooks(res.data))
+  }, [])
   return (
     <div className="host-left-bottom">
           <h1>My Bookings</h1>
           <div className="host-left-bottom-table">
+            {books.length==0?"No Bookings book now ?":
             <table className="table">
               <thead className="thead-dark">
                 <tr>
@@ -15,26 +21,17 @@ function MyBooks() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">15/9/2023</th>
-                  <td>Coimbatore</td>
-                  <td>Virat</td>
-                  <td className="text-success">Accepted</td>
+                {books.map((book)=>(
+                  <tr  key={book._id}>
+                  <th  scope="row">{book.startTime.substring(0,10)}</th>
+                  <td>{book.address}</td>
+                  <td>{book.ownerName}</td>
+                  <td className={book.status=="accepted"?"text-success":"text-reject"}>{book.status}</td>
                 </tr>
-                <tr>
-                  <th scope="row">18/9/2035</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td className="text-reject">Rejected</td>
-                </tr>
-                <tr>
-                  <th scope="row">14/8/2025</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td className="text-success">Accepted</td>
-                </tr>
+                ))}
+                
               </tbody>
-            </table>
+            </table>}
           </div>
         </div>
   )
