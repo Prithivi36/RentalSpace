@@ -3,6 +3,7 @@ import './WhatYouParking.css';
 import { FaCar, FaMotorcycle, FaTruck ,FaBox} from 'react-icons/fa'; 
 
 import { Link, useNavigate } from 'react-router-dom'; // Correct import
+import maploc from "../assets/2175138.webp"
 
 const WhatYouParking = () => {
     const [location, setLocation] = useState(null);
@@ -65,9 +66,15 @@ const WhatYouParking = () => {
                 </div>
             </div>
             <div className="map-container">
+                <div className="map-left">
+                    <img src={maploc} alt="" />
+
+                </div>
+                <div className="map-right">
                 <Link to="/user"><div className="map-placeholder">
                     <button onClick={handleLocationRequest}>Search Near You</button>
                 </div></Link>
+                </div>
             </div>
             {location && <p>Your location: {location.latitude}, {location.longitude}</p>}
             {error && <p className="error">{error}</p>}

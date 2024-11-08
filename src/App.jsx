@@ -22,7 +22,10 @@ function App() {
   return (
     <HashRouter>
       <div className="app">
+        <div className="nav-bg">
         <Navbar />
+        </div>
+        
         <Routes>
           {/* Default Home Page */}
           <Route
