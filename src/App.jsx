@@ -33,6 +33,9 @@ function App() {
             element={
               <>
                 <HeroSection />
+                <div className="hr">
+              
+                </div>
                 <WhatYouParking />
                 <HowItWorks />
                 <FAQ />

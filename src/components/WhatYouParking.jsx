@@ -3,7 +3,7 @@ import './WhatYouParking.css';
 import { FaCar, FaMotorcycle, FaTruck ,FaBox} from 'react-icons/fa'; 
 
 import { Link, useNavigate } from 'react-router-dom'; // Correct import
-import maploc from "../assets/2175138.webp"
+import maploc from "../assets/park.gif"
 
 const WhatYouParking = () => {
     const [location, setLocation] = useState(null);
@@ -41,6 +41,7 @@ const WhatYouParking = () => {
 
     return (
         <div className="what-you-parking">
+          
             <h1 className="heading">What are you parking?</h1>
             <div className="vehicle-options">
                 <div className="vehicle-option" onClick={handleClick}>
@@ -67,13 +68,22 @@ const WhatYouParking = () => {
             </div>
             <div className="map-container">
                 <div className="map-left">
-                    <img src={maploc} alt="" />
+               
+                <div className="video-overlay">
+                <img src={maploc} alt="" />
 
                 </div>
+                   
+               
+                </div>
                 <div className="map-right">
+                    <h2 className='map-head'>Connecting All Your Parking Solutions.</h2>
+                    <p className='map-para'>Our platform breaks down silos, integrating various hardware and software into a seamless, interoperable system. No matter the brand or model, we unify your parking infrastructure to support modern mobility.</p>
+                <div className="map-r-btm">
                 <Link to="/user"><div className="map-placeholder">
                     <button onClick={handleLocationRequest}>Search Near You</button>
                 </div></Link>
+                </div>
                 </div>
             </div>
             {location && <p>Your location: {location.latitude}, {location.longitude}</p>}

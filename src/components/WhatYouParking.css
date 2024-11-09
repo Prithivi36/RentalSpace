@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    background: linear-gradient(135deg, #b3e5fc, #e5e5e5);    z-index: 1000;
 }
 
 .heading {
@@ -45,50 +46,73 @@
     font-size: 2.5rem; /* Size of icons */
     margin-bottom: 10px; /* Space below icon */
 }
-
 .map-container {
-    width: 100%; /* Full width */
-    max-width: 700px; /* Limit the width */
-    height: 300px; /* Height of the map */
-    border: 1px solid black; /* Black border for map container */
-    border-radius: 10px; /* Rounded corners */
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;/* Wraps on smaller screens */
+    width: 80%;
+    min-height: 400px; /* Adjust height as needed */
+    /* Light background color */
+  
+    gap: 20px; /* Adds space between columns */
+    border-radius: 30px;
+    
+}
+
+/* Left side with video overlay */
+.map-left {
+    flex: 1 1 50%; /* Takes half width on large screens */
+    display: flex;
+  
     justify-content: center;
-    background: rgb(206, 205, 205);
-    gap: 70px;
-
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(12.5px);
--webkit-backdrop-filter: blur(12.5px);
-
-
+    align-items: center;
+    position: relative;
+   /* Hide overflow for video */
+    border-radius: 12px;
 }
 
-
-.map-left img{
-    width: 250px;
+.video-overlay img {
+    width: 100%; /* Full width for responsive video */
+    height: 100%; /* Full height to cover container */
+     /* Keeps video covering container */
+    border-radius: 12px;
+    background-color: #ebebeb;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-
-.map-placeholder button{
-    background-color: #005eb8;
-    padding: 13px;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: all 0.5s ease-in-out;
-
+.map-head{
+    font-family: "Poppins";
 }
 
-.map-container button:hover{
-    background-color: #016ed5;
+/* Right side with button */
+.map-right {
+    flex: 1 1 40%; /* Takes less space than video on large screens */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 12px;
 }
 
 .map-placeholder {
-    color: black;
-    font-size: 1.5rem; /* Placeholder text size */
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+ 
+}
+
+.map-placeholder button {
+    background-color: #005eb8; /* Button background */
+    color: #fff; /* Button text color */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.map-placeholder button:hover {
+    background-color: #00488a; /* Darker on hover */
 }
 
 
@@ -117,8 +141,8 @@ backdrop-filter: blur(12.5px);
     }
 
     .map-container {
-        height: 300px; /* Maintain map height */
-        max-width: 100%; /* Full width on mobile */
+        flex-direction: column; /* Stack left and right vertically */
+        height: auto; /* Adjust height to fit content */
     }
 
     .map-placeholder {
@@ -143,11 +167,9 @@ backdrop-filter: blur(12.5px);
     }
 
     .map-container {
-        height: 250px; /* Smaller map height for small devices */
-        display: flex;
-        flex-direction: column;
+        flex-direction: column; /* Stack left and right vertically */
+        height: auto; /* Adjust height to fit content */
     }
-    
 
     .map-placeholder {
         font-size: 1.1rem; /* Smaller text size */

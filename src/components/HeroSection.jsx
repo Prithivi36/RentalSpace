@@ -40,8 +40,9 @@ const HeroSection = () => {
                     </div>
                 </div>
                 <div className="hero-right">
-                <img src={car} alt="" />
+                    <img src={car} alt="" />
                 </div>
+
             </div>
             {/* <Navbar /> */}
 

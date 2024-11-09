@@ -92,7 +92,7 @@ const HowItWorks = () => {
   return (
     <div className="how-it-works">
       <div className="left-section">
-        <h1>How Sarkar Space Works</h1>
+        <h1 style={{fontFamily:"Poppins"}}>How Sarkar Space Works</h1>
         <div className="tabs">
           <button className={activeTab === 'Renting' ? 'active' : ''} onClick={() => setActiveTab('Renting')}>
             Renting

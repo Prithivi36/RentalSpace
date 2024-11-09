@@ -5,7 +5,9 @@
     justify-content: space-between;
     align-items: flex-start;
   }
-  
+  .head{
+    font-family: "Poppins";
+  }
   .left-section {
     width: 50%;
   }
@@ -21,9 +23,9 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
-    background-color: white;
+
     border-radius: 30px;
-    width: 325px;
+   
     padding: 5px;
   }
   
