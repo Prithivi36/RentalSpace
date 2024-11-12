@@ -161,7 +161,10 @@ const HostDashboard = () => {
       <div className="host-left">
         <UserDash currentUser={currentUser} />
         <hr />
+        <div className="my-books">
         <MyBooks/>
+
+        </div>
       </div>
       <div className="host-right">
         <div className="host-right-top">

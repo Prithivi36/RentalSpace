@@ -1,3 +1,19 @@
+/* Fade-in Animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.6s ease-out both;
+}
+
 /* Base styles */
 .hero-section {
     background: linear-gradient(to right, #ececec, #a0c4ff);
@@ -7,6 +23,8 @@
     padding: 5vh 5vw;
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
+    /* Apply fade-in */
+    animation: fade-in 0.6s ease-out both;
 }
 
 .hero-container {
@@ -21,6 +39,8 @@
 .hero-left {
     text-align: center;
     margin-bottom: 2vh;
+    /* Apply fade-in */
+    animation: fade-in 0.8s ease-out both;
 }
 
 .hero-text {
@@ -92,6 +112,8 @@
     width: 100%;
     max-width: 500px;
     height: auto;
+    /* Apply fade-in */
+    animation: fade-in 1s ease-out both;
 }
 
 .hero-right img {

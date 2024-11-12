@@ -1,7 +1,22 @@
+/* Fade-in Animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.6s ease-out both;
+}
+
 /* General Styles */
 body {
   font-family: 'Inter', sans-serif;
-  
   margin: 70px 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,8 +26,9 @@ body {
   display: flex;
   padding: 20px;
   gap: 20px;
-
   min-height: 100vh;
+  /* Apply fade-in */
+  animation: fade-in 0.6s ease-out both;
 }
 
 /* Left Section Styles */
@@ -22,6 +38,8 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Apply fade-in */
+  animation: fade-in 0.6s ease-out both;
 }
 
 .host-left-top {
@@ -33,7 +51,6 @@ body {
   gap: 20px;
   align-items: center;
 }
-
 
 .userdetails-left i {
   font-size: 100px;
@@ -93,6 +110,7 @@ table {
 .table .text-reject {
   color: #ff1e00;
 }
+
 /* Right Section Styles */
 .host-right {
   flex: 1;
@@ -100,6 +118,8 @@ table {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Apply fade-in */
+  animation: fade-in 0.6s ease-out both;
 }
 
 /* My Spaces Section */
