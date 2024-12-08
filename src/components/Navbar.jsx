@@ -7,7 +7,7 @@ const Navbar = () => {
     const navigator=useNavigate();
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+        <nav className="navbar ss navbar-expand-lg navbar-light bg-light ">
         <a className="navbar-brand fw-bolder " href="#">Rental Space</a>
         <button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
             <span className="navbar-toggler-icon"></span>

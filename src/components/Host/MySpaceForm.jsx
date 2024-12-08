@@ -1,5 +1,5 @@
 import React from 'react'
-import { addSpace } from '../../api/Api';
+import { addSpace, addStorage } from '../../api/Api';
 import Map from '../User/Map'
 
 function MySpaceForm(props) {
@@ -36,6 +36,7 @@ function MySpaceForm(props) {
             car: true,
             bike: true
           },
+          size:0,
           Available: true,
           pricePerHour: 0
         });
@@ -69,11 +70,12 @@ function MySpaceForm(props) {
             coordinates:[formData.lat,formData.lng]
           },
           vehiclesAllowed: formData.vehiclesAllowed.car?formData.vehiclesAllowed.bike?["car","bike"]:["car"]:["bike"],
+          size:formData.size,
           available: formData.Available,
           pricePerHour: formData.pricePerHour
     
         }
-        addSpace(data).then(res=>alert(res.data));
+        props.storage?addStorage(data).then(res=>alert(res.data)):addSpace(data).then(res=>alert(res.data));
     
         // Reset form data to initial state
         setFormData({
@@ -82,6 +84,7 @@ function MySpaceForm(props) {
             car: true,
             bike: true
           },
+          size:0,
           Available: true,
           pricePerHour: 0,
           lat: 0, // Reset latitude
@@ -93,7 +96,8 @@ function MySpaceForm(props) {
       };
     
     
-    console.log(props.formShow)
+    console.log(formData)
+    console.log(props.storage)
     
       
     
@@ -133,6 +137,7 @@ function MySpaceForm(props) {
                     </div>
 
                     <div className="form-group text-start">
+                        {!props.storage?<>
                         <p>Vehicles Allowed</p>
                         <div className="form-check">
                         <input
@@ -155,9 +160,9 @@ function MySpaceForm(props) {
                             onChange={handleChange}
                         />
                         <label className="form-check-label" htmlFor="bike">Bike</label>
-                        </div>
-
-                        <p className="text-success mt-3">Available</p>
+                        </div></>:<>
+                        <label className='form-check-label' htmlFor="size">Size</label>
+                        <input className='f form-control' name='size' onChange={handleChange} id='size' type="number" /></>}
                     </div>
 
                     <div className="form-group text-start">

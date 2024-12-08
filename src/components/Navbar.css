@@ -50,7 +50,7 @@
     transform: translateX(-50%); /* Center the navbar */
     font-family: 'Roboto', sans-serif; /* Use Roboto for other texts */
     top: 0; /* Stick to the top */
-    z-index: 1000; /* Ensure it's above the hero image */
+    z-index: 100; /* Ensure it's above the hero image */
 }
 .navbar-logo {
     font-size: 28px; /* Adjusted size for logo */
@@ -128,4 +128,7 @@
 
 .dropdown-icon.open {
     transform: rotate(180deg); /* Rotate icon when open */
+}
+.ss{
+    z-index: 100000;
 }

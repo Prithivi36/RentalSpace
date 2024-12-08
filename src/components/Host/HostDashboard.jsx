@@ -18,27 +18,16 @@ import MySpaceForm from "./MySpaceForm";
 const HostDashboard = () => {
 
   const [formShow, setFormShow] = useState(false);
+  const [formShowStorage, setFormShowStorage] = useState(false);
   const handleShow = () => setFormShow(true);
+  const handleShowStorage = () => setFormShowStorage(true);
 
-  const [userRequest, setUserRequest] = useState([]);
 
-    // Handle acceptance logic
-    function handleAccept(id) {
-      acceptBooking(id)
-      location.reload()
-    }
-  
-    // Handle rejection logic    
-    function handleReject(id) {
-      rejectBooking(id);
-      location.reload();
-    }
 
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     getUser(localStorage.getItem('user')).then(res => setCurrentUser(res.data));
-    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f) => (f.status != "rejected"))));
   }, []);
 
   return (
@@ -66,11 +55,14 @@ const HostDashboard = () => {
           </div>
           <div className=" row gap-3 px-4">
             <button onClick={handleShow} className="btn  btn-sm rounded-5 btn-primary">Add Space</button>
-            <button className="btn  btn-sm rounded-5 btn-primary">Add Storage</button>
+            <button onClick={handleShowStorage} className="btn  btn-sm rounded-5 btn-primary">Add Storage</button>
           </div>
         </div>
         {formShow &&(
-              <MySpaceForm setFormShow={setFormShow} />
+              <MySpaceForm  storage={false} setFormShow={setFormShow} />
+            )}
+        {formShowStorage &&(
+              <MySpaceForm storage={true} setFormShow={setFormShowStorage} />
             )}
         <hr />
         <div className="p-4">
@@ -96,22 +88,22 @@ const HostDashboard = () => {
             </ul>
             <div className="tab-content" id="pills-tabContent">
               <div className="tab-pane fade show active" id="pills-home" role="tabpanel" >
-                <MySpaces formShow={formShow} setFormShow={setFormShow} />
+                <MySpaces storage={false}/>
               </div>
               <div className="tab-pane fade" id="pills-profile" role="tabpanel" >
                 <MyBooks/>
               </div>
               <div className="tab-pane fade" id="pills-contact" role="tabpanel">
-                <Requests userRequest={userRequest} handleAccept={handleAccept} handleReject={handleReject}/>
+                <Requests/>
               </div>
               <div className="tab-pane fade" id="pills-space" role="tabpanel">
-                Spaces
+                <MySpaces storage={true} />
               </div>
               <div className="tab-pane fade" id="pills-space-books" role="tabpanel">
-                Spaces books
+                <MyBooks storage={true} />
               </div>
               <div className="tab-pane fade" id="pills-space-rqst" role="tabpanel">
-                Spaces Requests
+                <Requests storage={true}/>
               </div>
             </div>
             </div>

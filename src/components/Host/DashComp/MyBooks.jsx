@@ -1,9 +1,10 @@
 import React from 'react'
-import { getMyBooks } from '../../../api/Api'
+import { getMyBooks, getMyBooksStorage } from '../../../api/Api'
 
-function MyBooks() {
+function MyBooks(props) {
   const [books,setBooks]=React.useState([])
   React.useEffect(() => {
+    props.storage?getMyBooksStorage(localStorage.getItem('user'),true).then(res=>setBooks(res.data)):
     getMyBooks(localStorage.getItem('user')).then(res=>setBooks(res.data))
   }, [])
   return (
