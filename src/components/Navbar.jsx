@@ -7,13 +7,13 @@ const Navbar = () => {
     const navigator=useNavigate();
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">Rental Space</a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+        <a className="navbar-brand fw-bolder " href="#">Rental Space</a>
+        <button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
             <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
+        <div className="collapse navbar-collapse " id="navbarNavAltMarkup">
+            <div className="navbar-nav ms-auto">
             <a className="nav-item nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
             <a className="nav-item nav-link" onClick={()=>navigator("/host")}>Become a Host</a>
             <a className="nav-item nav-link" onClick={()=>navigator("/login")}>Login</a>
