@@ -1,6 +1,29 @@
 import React from 'react'
+import { acceptBooking, acceptBookingStorage, getUserRequest, getUserRequestStorage, rejectBooking } from '../../../api/Api';
 
-function Requests({userRequest, handleAccept, handleReject}) {
+function Requests(props) {
+
+  const [userRequest, setUserRequest] = React.useState([]);
+
+  // Handle acceptance logic
+  function handleAccept(id) {
+    props.storage?acceptBookingStorage(id):
+    acceptBooking(id)
+    location.reload()
+  }
+
+  // Handle rejection logic    
+  function handleReject(id) {
+    props.storage?rejectBookingStorage(id):
+    rejectBooking(id);
+    location.reload();
+  }
+
+  React.useEffect(() => {
+    props.storage?getUserRequestStorage(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f) => (f.status != "rejected")))):
+    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f) => (f.status != "rejected"))));
+  }, []);
+
   return (
     <div className="host-right-bottom">
           <div className="notifications">

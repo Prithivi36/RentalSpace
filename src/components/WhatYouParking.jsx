@@ -4,6 +4,7 @@ import { FaCar, FaMotorcycle, FaTruck ,FaBox} from 'react-icons/fa';
 
 import { Link, useNavigate } from 'react-router-dom'; // Correct import
 import maploc from "../assets/park.gif"
+import { FaCaravan, FaTruckFront } from 'react-icons/fa6';
 
 const WhatYouParking = () => {
     const [location, setLocation] = useState(null);
@@ -57,14 +58,14 @@ const WhatYouParking = () => {
                     <span>Truck</span>
                 </div>
                 <div className="vehicle-option" onClick={handleClick}>
-                    <FaCar className="vehicle-icon" />
+                    <FaTruckFront className="vehicle-icon" />
                     <span>Jeep</span>
                 </div>
 
-                <div className="vehicle-option" onClick={handleStorageClick}>
+                {/* <div className="vehicle-option" onClick={handleStorageClick}>
                 <FaBox className="vehicle-icon" />
                     <span>Storage</span>
-                </div>
+                </div> */}
             </div>
             <div className="map-container">
                 <div className="map-left">

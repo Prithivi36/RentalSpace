@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 
 const MapClickHandler = ({ setLatLng, localLat }) => {
-  // Use map events to capture the latitude and longitude on click
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
@@ -20,6 +19,7 @@ const MapClickHandler = ({ setLatLng, localLat }) => {
 const MapWithClick = (props) => {
   const [latLng, setLatLng] = useState({ lat: props.current.lat, lng: props.current.lng });
   const navigate = useNavigate();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     // Use navigator.geolocation to get user's current position
@@ -30,6 +30,7 @@ const MapWithClick = (props) => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           });
+          setReady(true);
         },
         (error) => {
           console.error("Error getting location: ", error);
@@ -38,7 +39,7 @@ const MapWithClick = (props) => {
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
-  }, []);
+  }, [latLng]);
 
   // Custom icon for the marker
   const currentLocationIcon = new L.Icon({
@@ -48,10 +49,11 @@ const MapWithClick = (props) => {
     popupAnchor: [1, -34], // point from which the popup should open relative to the iconAnchor
   });
 
-  return (
-    <div>
-      <h2>Click the map to get latitude and longitude</h2>
-      <MapContainer center={[latLng.lat, latLng.lng]} zoom={13} style={{ height: '400px', width: '100%' }}>
+  return (!ready?
+  
+  <p>Gathering Location info </p>:
+    <div className='rounded-5 overflow-hidden '>
+      <MapContainer center={[latLng.lat, latLng.lng]} zoom={13} style={{ height: props.wid, width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -63,13 +65,6 @@ const MapWithClick = (props) => {
         </Marker>
         <MapClickHandler localLat={setLatLng} setLatLng={props.lat} />
       </MapContainer>
-      {latLng && (
-        <p>
-          Latitude: {latLng.lat}, Longitude: {latLng.lng}
-        </p>
-      )}
-      {/* Navigate to /dashboard if the latLng is set */}
-      {/* {latLng.lat && latLng.lng && navigate('/dashboard')} */}
     </div>
   );
 };

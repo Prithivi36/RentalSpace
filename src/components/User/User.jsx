@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './User.css'; 
 import Map from './Map';
-import { findNearby } from '../../api/Api';
+import { findNearby, findNearbyStore } from '../../api/Api';
 import Spaces from './Spaces';
 
 const User = ({ isHost, userLocation }) => {
@@ -16,33 +16,48 @@ const User = ({ isHost, userLocation }) => {
   //auto detected data
   const [current,setCurrent]=React.useState({lat:0,lng:0})
 
+  const [storage,setStorage]=React.useState(false)
 
   useEffect(()=>{
     navigator.geolocation.getCurrentPosition(
       (pos)=>{
         console.log("bilii")
         setCurrent((p)=>({...p,lat:pos.coords.latitude,lng:pos.coords.longitude}))
+        storage?findNearbyStore(langLat.lat||pos.coords.latitude,langLat.lng||pos.coords.longitude,5000).then(
+          res=>setAvailableSpace(res.data)
+        ):
         findNearby(langLat.lat||pos.coords.latitude,langLat.lng||pos.coords.longitude,5000).then(
           res=>setAvailableSpace(res.data)
         )
       }
     )
-  },[langLat])
+  },[storage])
  
 console.log(availableSpace)
   return (
-    <div className="list-storage-container d-block p-3">
-      
-        {!show?<button onClick={handleMapClick} className='btn btn-primary'>Enter Mannually</button>:<button onClick={handleMapClick} className='btn btn-primary'>Ok</button> }
-        {show && <Map current={current} lat={setLangLat}/>}
-      {console.log(langLat)}
-      {availableSpace.length==0?
-      <h4 className="">
-        No nearby parking spaces available, wanna Enter manually ??
-      </h4>
-      :availableSpace.map((space)=>(
-        <Spaces spaces={space} key={space._id}/>
-      ))}
+    <div className='d-md-flex px-2 justify-content-center align-items-center'>
+      <div className="d-block d-md-none">
+        <Map wid={"40vh"} current={current} lat={setLangLat}/>
+      </div>
+      <div  className="">
+        <div className="change mb-3 mt-3">
+          <p className='fw-bolder my-0 d-inline  me-3'>Nearby Spaces</p>
+          <button onMouseOver={()=>console.log("Over")} onClick={()=>setStorage(!storage)} className="btn btn-sm btn-primary">{storage?"parking":"storage"}</button>
+        </div>
+      <div style={{height:"80vh", overflow:"scroll"}}  className="list-storage-container d-block px-3">
+        {availableSpace.length==0?
+        <h4 className="">
+          No nearby parking spaces available, wanna Enter manually ??
+        </h4>
+        :availableSpace.map((space)=>(
+          <Spaces storage={storage} spaces={space} key={space._id}/>
+        ))}
+      </div>
+      </div>
+      <div className="col-6 d-none d-md-block ">
+        <p className="fw-bolder pt-5">Select in Map</p>
+        <Map wid={"80vh"}  current={current} lat={setLangLat}/>
+      </div>
     </div>
   );
 };
