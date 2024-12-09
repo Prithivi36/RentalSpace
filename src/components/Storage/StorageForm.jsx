@@ -60,8 +60,8 @@ const StorageForm = () => {
           Add Storage
         </button>
       ) : (
-        <div className="modal show" style={{ display: 'block' }}>
-          <div className="modal-dialog">
+        <div className="modal fade" id='form-modal' >
+          <div className="modal-dialog modal-dialog-centereds">
             <div className="modal-content">
               <div className="modal-header d-flex justify-content-between">
                 <h5 className="modal-title">Add Storage</h5>
@@ -69,13 +69,14 @@ const StorageForm = () => {
                   type="button"
                   className="close p-2 btn btn-danger"
                   onClick={() => setShowForm(false)}
+                  dataDismiss="modal"
                 >
                   <span>&times;</span>
                 </button>
               </div>
               <div className="modal-body">
                 <form onSubmit={handleSubmit}>
-                  <div className="form-group text-start">
+                  {/* <div className="form-group text-start">
                     <label>Name</label>
                     <input
                       type="text"
@@ -85,7 +86,7 @@ const StorageForm = () => {
                       value={formData.name}
                       onChange={handleChange}
                     />
-                  </div>
+                  </div> */}
                   <div className="form-group text-start">
                     <label>Address</label>
                     <textarea

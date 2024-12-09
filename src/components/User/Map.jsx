@@ -39,7 +39,7 @@ const MapWithClick = (props) => {
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
-  }, [latLng]);
+  }, []);
 
   // Custom icon for the marker
   const currentLocationIcon = new L.Icon({

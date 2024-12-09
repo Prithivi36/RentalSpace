@@ -106,13 +106,13 @@ function MySpaceForm(props) {
         setShow((prevShow) => !prevShow);
       };
     return (
-        <div className="modal show" style={{ display: 'block' }}>
-            <div className="modal-dialog">
+        <div className="modal show " id='form-mod' style={{ display: 'block' }}>
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                 <div className="modal-header d-flex justify-content-between">
                     <h5 className="modal-title ">Add Space</h5>
 
-                    <button type="button" className="close p-2 btn btn-danger " onClick={handleClose}>
+                    <button type="button" dataDismiss="modal" className="close p-2 btn btn-danger " onClick={handleClose}>
                     <span>&times;</span>
                     </button>
 
@@ -122,7 +122,7 @@ function MySpaceForm(props) {
                     <div className="form-group text-start">
                         <label>Address</label>
                         <textarea
-                        className="form-control"
+                        className="form-control border-3"
                         name="Address"
                         required
                         value={formData.Address}
@@ -132,7 +132,7 @@ function MySpaceForm(props) {
                         {!show ? 'Search by Map' : 'Ok'}
                         </button>
                         {show && (
-                        <Map current={current} lat = {setFormData} />
+                        <Map wid="200px" current={current} lat = {setFormData} />
                         )}
                     </div>
 
@@ -162,14 +162,14 @@ function MySpaceForm(props) {
                         <label className="form-check-label" htmlFor="bike">Bike</label>
                         </div></>:<>
                         <label className='form-check-label' htmlFor="size">Size</label>
-                        <input className='f form-control' name='size' onChange={handleChange} id='size' type="number" /></>}
+                        <input className='f form-control border-3' name='size' onChange={handleChange} id='size' type="number" /></>}
                     </div>
 
                     <div className="form-group text-start">
                         <label>Price per Hour</label>
                         <input
                         type="number"
-                        className="form-control"
+                        className="form-control border-3"
                         name="pricePerHour"
                         required
                         value={formData.pricePerHour}
