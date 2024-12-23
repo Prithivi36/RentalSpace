@@ -21,7 +21,7 @@ function SpaceComp(props) {
         <p><span className="fw-bold">Located in: </span>{props.space.address||"Loading"}</p>
         <div className="vehicles-allowed">
           <p className='fw-bolder'>Total Revenue: <span className='fw-medium text-success'>{props.space.totalRevenue||"INR" +"12000"}</span></p>
-          <p className='fw-bolder'>Price: <span className='fw-medium text-success'>{props.space.pricePerHour||"0"}</span></p>
+          <p className='fw-bolder'>Price: <span className='fw-medium text-success'>{props.space.pricePerHour||"0"} ₹</span></p>
           <p className='fw-bolder'>Available: <span className={`fw-medium ${props.space.available?"text-success":"text-danger"}`}>{props.space.available?"Available":"Unavailables"}</span></p>
         </div>
         

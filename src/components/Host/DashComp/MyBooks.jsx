@@ -28,7 +28,7 @@ function MyBooks(props) {
                   <th  scope="row">{book.startTime.substring(0,10)}</th>
                   <td>{book.address}</td>
                   <td>{book.ownerName||"Unkown"}</td>
-                  <td>{book.cost||"INR 20"}</td>
+                  <td>{book.totalCost +" ₹"||"error x"}</td>
                   <td className={book.status=="accepted"?"text-success":"text-reject"}>{book.status}</td>
                   <td><button className='btn btn-outline-danger btn-sm'>cancel</button></td>
                 </tr>

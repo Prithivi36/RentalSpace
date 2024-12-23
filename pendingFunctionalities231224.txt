@@ -1,0 +1,14 @@
+
+23-12-2024
+Total Revenue Update
+Availability Toggle
+Owner name in booking records
+Delete booking History
+Cancel booking
+Total Account Earning
+number of storage metrics active inactive
+delete a storage no current booking policy
+Edit profile (optional)
+Security - Last Step
+validations for all post requests
+Additional Features
