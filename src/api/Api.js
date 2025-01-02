@@ -59,3 +59,9 @@ export function getMyBooks(id){
 export function getMyBooksStorage(id){
     return axios.get(BASE_URL+"/sbook/all/"+id);
 }
+export function cancelBookings(id,type){
+    return axios.delete(BASE_URL+"/"+type+"/"+id)
+}
+export function messageViewed(id){
+    return axios.patch(BASE_URL+"/user/"+id)
+}

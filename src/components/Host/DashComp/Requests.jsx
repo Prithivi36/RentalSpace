@@ -1,5 +1,5 @@
 import React from 'react'
-import { acceptBooking, acceptBookingStorage, getUserRequest, getUserRequestStorage, rejectBooking } from '../../../api/Api';
+import { acceptBooking, acceptBookingStorage, getUserRequest, getUserRequestStorage, rejectBooking, rejectBookingStorage } from '../../../api/Api';
 
 function Requests(props) {
 

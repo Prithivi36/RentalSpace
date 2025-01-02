@@ -13,15 +13,17 @@ import Map from '../User/Map'
 import StorageForm from "../Storage/StorageForm";
 import MySpaces from "./MySpaces";
 import MySpaceForm from "./MySpaceForm";
+import Notifications from "./DashComp/Notifications";
 
 
 const HostDashboard = () => {
 
   const [formShow, setFormShow] = useState(false);
   const [formShowStorage, setFormShowStorage] = useState(false);
+  const [NoticeShow,setNoticeShow]=useState(false)
   const handleShow = () => setFormShow(true);
   const handleShowStorage = () => setFormShowStorage(true);
-
+  const handleNotifies=()=>setNoticeShow(true)
 
 
   const [currentUser, setCurrentUser] = useState({});
@@ -35,29 +37,17 @@ const HostDashboard = () => {
       <div className="host-left">
         <div className="top d-md-flex align-items-center mb-4 px-2 px-md-0 mb-md-0 justify-content-between ">
           <UserDash currentUser={currentUser} />
-          <div className="d-md-flex mb-4 gap-2">
-            <div className="card p-3">
-              <p className="fw-bolder text-secondary">Total Earning</p>
-              <h6 className="fw-bolder text-primary py-3">INR 1000</h6>
-            </div>
-            <div className="card p-3">
-            <p className="fw-bolder text-secondary">Storages</p>
-            <h6 className="fw-bolder text-primary "><span className="text-black fw-light">active :</span > 5</h6>
-              <h6 className="fw-bolder text-primary"><span className="text-black fw-light">Inactive :</span > 2</h6>
-              <h6 className="fw-bolder text-primary"><span className="text-black fw-light">Total :</span > 7</h6>
-            </div>
-            <div className="card p-3">
-            <p className="fw-bolder text-secondary">Spaces</p>
-            <h6 className="fw-bolder text-primary "><span className="text-black fw-light">active :</span > 3</h6>
-              <h6 className="fw-bolder text-primary"><span className="text-black fw-light">Inactive :</span > 1</h6>
-              <h6 className="fw-bolder text-primary"><span className="text-black fw-light">Total :</span > 4</h6>
-            </div>
-          </div>
           <div className=" row gap-3 px-4">
+            <button onClick={handleNotifies} className="btn btn-outlint-primary">🔔</button>
             <button onClick={handleShow} className="btn  btn-sm rounded-5 btn-primary">Add Space</button>
             <button onClick={handleShowStorage} className="btn  btn-sm rounded-5 btn-primary">Add Storage</button>
           </div>
         </div>
+        {
+          NoticeShow&&(
+            <Notifications off={setNoticeShow} />
+          )
+        }
         {formShow &&(
               <MySpaceForm  storage={false} setFormShow={setFormShow} />
             )}

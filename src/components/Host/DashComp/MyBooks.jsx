@@ -1,12 +1,17 @@
 import React from 'react'
-import { getMyBooks, getMyBooksStorage } from '../../../api/Api'
+import { cancelBookings, getMyBooks, getMyBooksStorage } from '../../../api/Api'
 
 function MyBooks(props) {
   const [books,setBooks]=React.useState([])
   React.useEffect(() => {
     props.storage?getMyBooksStorage(localStorage.getItem('user'),true).then(res=>setBooks(res.data)):
-    getMyBooks(localStorage.getItem('user')).then(res=>setBooks(res.data))
+    getMyBooks(localStorage.getItem('user')).then(res=>setBooks(res.data.reverse()))
   }, [])
+  function cancelBooking(id){
+    cancelBookings(id,props.storage?"sbook":"book").then(
+      res=>alert(res.data)
+    )
+  }
   return (
     <div className="host-left-bottom">
           <div className="host-left-bottom-table table-responsive">
@@ -27,10 +32,18 @@ function MyBooks(props) {
                   <tr  key={book._id}>
                   <th  scope="row">{book.startTime.substring(0,10)}</th>
                   <td>{book.address}</td>
-                  <td>{book.ownerName||"Unkown"}</td>
+                  <td>{book.owner||"Unkown"}</td>
                   <td>{book.totalCost +" ₹"||"error x"}</td>
                   <td className={book.status=="accepted"?"text-success":"text-reject"}>{book.status}</td>
-                  <td><button className='btn btn-outline-danger btn-sm'>cancel</button></td>
+                  <td className=''>
+                    <div className="d-flex justify-content-center align-items-center">
+                      {book.status=="processing"?
+                      <button onClick={()=>cancelBooking(book._id)} className='btn btn-outline-danger btn-sm'>cancel</button>:
+                      book.status==="rejected"?<button  className='btn btn-outline-secondary btn-sm'>view</button>:
+                      <button className='btn btn-outline-primary btn-sm'>Mark as Completed</button>
+                      }
+                    </div>
+                  </td>
                 </tr>
                 ))}
                 

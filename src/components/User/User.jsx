@@ -36,6 +36,8 @@ const User = ({ isHost, userLocation }) => {
   },[storage,langLat])
  
 console.log(availableSpace)
+console.log(localStorage.getItem("user"))
+
   return (
     <div className='d-md-flex px-2 justify-content-center align-items-center'>
       <div className="d-block d-md-none">
@@ -51,7 +53,7 @@ console.log(availableSpace)
         <h4 className="">
           No nearby parking spaces available, wanna Enter manually ??
         </h4>
-        :availableSpace.map((space)=>(
+        :availableSpace.filter((s)=>s.userId!=localStorage.getItem('user')).map((space)=>(
           <Spaces lat={current.lat} lng={current.lng} storage={storage} spaces={space} key={space._id}/>
         ))}
       </div>}
