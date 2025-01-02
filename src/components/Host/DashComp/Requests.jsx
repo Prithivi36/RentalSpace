@@ -1,5 +1,5 @@
 import React from 'react'
-import { acceptBooking, acceptBookingStorage, getUserRequest, getUserRequestStorage, rejectBooking, rejectBookingStorage } from '../../../api/Api';
+import { acceptBooking, acceptBookingStorage, getUserRequest, getUserRequestPending, getUserRequestStorage, getUserRequestStoragePending, rejectBooking, rejectBookingStorage } from '../../../api/Api';
 
 function Requests(props) {
 
@@ -20,8 +20,8 @@ function Requests(props) {
   }
 
   React.useEffect(() => {
-    props.storage?getUserRequestStorage(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f) => (f.status != "rejected")))):
-    getUserRequest(localStorage.getItem('user')).then(res => setUserRequest(res.data.filter((f) => (f.status != "rejected"))));
+    props.storage?getUserRequestStoragePending(localStorage.getItem('user')).then(res => setUserRequest(res.data)):
+    getUserRequestPending(localStorage.getItem('user')).then(res => setUserRequest(res.data));
   }, []);
 
   return (

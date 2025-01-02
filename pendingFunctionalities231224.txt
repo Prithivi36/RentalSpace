@@ -1,12 +1,7 @@
 
-Completed toggle
 delete a storage
 Contact of Owner
-Availability Toggle
 Total Revenue Update
-Owner name in booking records
 Total Account Earning
-Edit profile (optional)
 Security - Last Step
 validations for all post requests
-Additional Features

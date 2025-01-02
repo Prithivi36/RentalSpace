@@ -25,20 +25,31 @@ const HostDashboard = () => {
   const handleShowStorage = () => setFormShowStorage(true);
   const handleNotifies=()=>setNoticeShow(true)
 
+  
 
   const [currentUser, setCurrentUser] = useState({});
+  const [unview,setUnview]=React.useState(0);
 
   useEffect(() => {
-    getUser(localStorage.getItem('user')).then(res => setCurrentUser(res.data));
+    getUser(localStorage.getItem('user')).then(res =>{ setCurrentUser(res.data); return res})
+    .then(dat=>dat.data.inbox)
+    .then(arr=>arr.filter((p)=>!p.viewed))
+    .then(filtered=>setUnview(filtered.length))
+    
   }, []);
-
+  
+  console.log(currentUser)
+  console.log("Userrrr")
   return (
     <div className="dashboard-container">
       <div className="host-left">
-        <div className="top d-md-flex align-items-center mb-4 px-2 px-md-0 mb-md-0 justify-content-between ">
+        <div className="top d-md-flex align-items-center mb-4 py-4 px-2 px-md-0 mb-md-0 justify-content-between ">
           <UserDash currentUser={currentUser} />
           <div className=" row gap-3 px-4">
-            <button onClick={handleNotifies} className="btn btn-outlint-primary">🔔</button>
+            <div className="">
+              <button onClick={handleNotifies} className="btn notify btn-outline-primary">🔔</button>
+              <p className="counter bg-danger text-center rounded-5 d-inline text-light py-1 px-2">{unview}</p>
+            </div>
             <button onClick={handleShow} className="btn  btn-sm rounded-5 btn-primary">Add Space</button>
             <button onClick={handleShowStorage} className="btn  btn-sm rounded-5 btn-primary">Add Storage</button>
           </div>

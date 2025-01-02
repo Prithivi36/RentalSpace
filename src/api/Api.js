@@ -23,6 +23,12 @@ export function getUserRequest(id){
 export function getUserRequestStorage(id){
     return axios.get(BASE_URL+"/sbook/my/"+id)
 }
+export function getUserRequestPending(id){
+    return axios.get(BASE_URL+"/book/my/p/"+id)
+}
+export function getUserRequestStoragePending(id){
+    return axios.get(BASE_URL+"/sbook/my/p/"+id)
+}
 export function acceptBooking(id){
     return axios.patch(BASE_URL+"/book/"+id)
 }
@@ -64,4 +70,10 @@ export function cancelBookings(id,type){
 }
 export function messageViewed(id){
     return axios.patch(BASE_URL+"/user/"+id)
+}
+export async function toggleAvail(id,online,type){
+    return axios.patch(BASE_URL+"/"+type+"/"+id+"/"+online)
+}
+export async function markCompleted(id,type){
+    return axios.patch(BASE_URL+"/"+type+"/c/"+id)
 }
