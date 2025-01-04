@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL="http://parking.prithivi.tech:8080"
+const BASE_URL="https://back.parking.prithivi.tech"
 
 export  function saveUser(user){
     return axios.post(BASE_URL+"/user/",user);
