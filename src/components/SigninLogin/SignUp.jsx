@@ -8,7 +8,8 @@ const SignUp = () => {
     const [user,setUser]=React.useState({
       name:"",
       email:"",
-      phone:""
+      phone:"",
+      password:""
     })
     const handleSubmit=()=>{
       saveUser(user).then(
@@ -42,7 +43,7 @@ const SignUp = () => {
             <input name='phone' type="text" onChange={handleChange} placeholder="Phone" />
           </div>
           <div className="pass-log">
-            <input type="password" placeholder="Password" />
+            <input name="password" type="password" onChange={handleChange} placeholder="Password" />
           </div>
 
           <button className="login-btn" onClick={handleSubmit}>Sign Up</button>
