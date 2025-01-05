@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// const BASE_URL="https://back.parking.prithivi.tech"
-const BASE_URL="http://localhost:8080"
+const BASE_URL="https://back.parking.prithivi.tech"
+// const BASE_URL="http://localhost:8080"
 
 export  function saveUser(user){
-    return axios.post(BASE_URL+"/user/",user);
+    return axios.post(BASE_URL+"/auth/reg",user);
 }
 axios.interceptors.request.use(function(config){
     
