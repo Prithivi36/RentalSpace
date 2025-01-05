@@ -5,6 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const navigator=useNavigate();
+    function handleLogout(){
+        localStorage.removeItem("user")
+        localStorage.removeItem("key")
+        window.location.href="/"
+    }
     return (
 
         <nav className="navbar ss navbar-expand-lg navbar-light bg-light ">
@@ -16,8 +21,8 @@ const Navbar = () => {
             <div className="navbar-nav ms-auto">
             <a className="nav-item nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
             <a className="nav-item nav-link" onClick={()=>navigator("/host")}>Become a Host</a>
-            <a className="nav-item nav-link" onClick={()=>navigator("/login")}>Login</a>
-            <a className="nav-item nav-link" onClick={()=>navigator("/signup")}>Signup</a>
+            {!localStorage.getItem("key")?<a className="nav-item nav-link" onClick={()=>navigator("/login")}>Login</a>:<a onClick={handleLogout} className="nav-item nav-link">Logout</a>}
+            {!localStorage.getItem("key")&&<a className="nav-item nav-link" onClick={()=>navigator("/signup")}>Signup</a>}
             </div>
         </div>
         </nav>

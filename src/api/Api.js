@@ -1,12 +1,22 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const BASE_URL="https://back.parking.prithivi.tech"
+// const BASE_URL="https://back.parking.prithivi.tech"
+const BASE_URL="http://localhost:8080"
 
 export  function saveUser(user){
     return axios.post(BASE_URL+"/user/",user);
 }
-export function getUid(email){
-    return axios.get(BASE_URL+"/user/mail/"+email);
+axios.interceptors.request.use(function(config){
+    
+    config.headers['Authorization']=localStorage.getItem("key")
+    return config;
+})
+export async function getUid(datas){
+    console.log(datas , "From Uid")
+    await axios.post(BASE_URL+"/auth/get",(datas)).then(res=>{localStorage.setItem("key","Bearer "+res.data);console.log(res.data)})
+    .catch(err=>console.log(err))
+    return axios.get(BASE_URL+"/user/mail/"+datas.email);
 }
 export function getUser(id){
     return axios.get(BASE_URL+"/user/"+id);

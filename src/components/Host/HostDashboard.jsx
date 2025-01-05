@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./HostDashboard.css";
 import Navbar from "./Navbar";
-import { acceptBooking, addSpace, getUser, getUserRequest, getUserSpace, rejectBooking } from "../../api/Api";
+import { acceptBooking, addSpace, getUid, getUser, getUserRequest, getUserSpace, rejectBooking } from "../../api/Api";
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import UserDash from "./DashComp/UserDash";
@@ -14,6 +14,7 @@ import StorageForm from "../Storage/StorageForm";
 import MySpaces from "./MySpaces";
 import MySpaceForm from "./MySpaceForm";
 import Notifications from "./DashComp/Notifications";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const HostDashboard = () => {
@@ -24,14 +25,18 @@ const HostDashboard = () => {
   const handleShow = () => setFormShow(true);
   const handleShowStorage = () => setFormShowStorage(true);
   const handleNotifies=()=>setNoticeShow(true)
-
+  // const {id} = useParams();
   
-
+  const navigator= useNavigate()
   const [currentUser, setCurrentUser] = useState({});
   const [unview,setUnview]=React.useState(0);
 
   useEffect(() => {
-    getUser(localStorage.getItem('user')).then(res =>{ setCurrentUser(res.data); return res})
+    if(!localStorage.getItem("key")){
+      navigator("/login")
+      return
+    }
+    getUser(localStorage.getItem("user")).then(res =>{ setCurrentUser(res.data); return res})
     .then(dat=>dat.data.inbox)
     .then(arr=>arr.filter((p)=>!p.viewed))
     .then(filtered=>setUnview(filtered.length))
@@ -112,5 +117,4 @@ const HostDashboard = () => {
     </div>
   );
 };
-
 export default HostDashboard;

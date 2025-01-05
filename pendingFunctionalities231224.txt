@@ -1,7 +1,6 @@
 
 delete a storage
 Contact of Owner
-Total Revenue Update
 Total Account Earning
 Security - Last Step
 validations for all post requests

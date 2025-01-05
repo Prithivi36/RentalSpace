@@ -9,11 +9,12 @@ const Login = () => {
       email:"",
       password:""
     })
-    function handleSubmit(){
+    
+     async function handleSubmit(){
       
-      getUid(user.email).then(res=>handleLogin(res.data))
+      await getUid(user).then(res=>handleLogin(res.data))
       
-        navigate('/hostdash')
+      navigate('/hostdash')
     }
     function handleLogin(d){
       localStorage.setItem('user',d)
